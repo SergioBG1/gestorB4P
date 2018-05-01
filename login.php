@@ -19,8 +19,7 @@
         $smarty->cache_dir = 'cache';
         $frase='';
         $smarty->assign("frase", $frase);
-//si le damos a enviar
-        if ($_POST['enviar']) {
+        if (isset($_POST['enviar'])) {
             $user = $_POST['user'];
             $contrasena = md5($_POST['pass']);
             $bd = new BD();
@@ -30,7 +29,7 @@
                 $_SESSION['pass'] = $contrasena;
                 $id = $bd->consigueID("sergio");
                 $_SESSION['id'] = $id[0]['id_empresa'];
-                header("Location:inicioEmpresa.php");
+                header("Location:perfilEmpresa.php");
             } else {
                 $frase = "Usuario introducido incorrecto<br>";
                 $smarty->assign("frase", $frase);

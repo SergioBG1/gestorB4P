@@ -51,7 +51,17 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }  
-    
+         function listarEventos($id) {
+        try {
+            $con = "SELECT * from evento where id_empresa_e=:id";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id' => $id]);
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  
+     
 
 /**
  * Obtiene los productos de la selección
@@ -64,12 +74,20 @@ class BD {
  * @return \Producto
  */
     function creaEvento($evento, $ciudad, $plazas, $id) {
-        $objetos = [];
         try {
             $plazas = (int) $plazas;
             $con = "INSERT INTO `evento`(`nombre`, `ciudad`, `plazas`, `id_empresa_e`)  VALUES (:evento, :ciudad, :plazas, :id);";
             $consulta = $this->conexion->prepare($con);
             $consulta->execute(['evento' => $evento, 'ciudad' => $ciudad, 'plazas' => $plazas, 'id' => $id]);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function eliminaEvento($id) {
+        try {
+            $con = "DELETE FROM `evento` WHERE id_evento=:id;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id' => $id]);
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
         }

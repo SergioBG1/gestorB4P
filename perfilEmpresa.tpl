@@ -70,22 +70,17 @@ margin-left: 25px;
 
     </style>
     <body>
-        <h1>Listado de Eventos de la empresa {$nombre}</h1>
-        <table><tr><th>Nombre del Evento</th><th>Ciudad</th><th>Plazas</th></tr>
-{foreach $array as $item}
-<tr>
-    <td>{$item["nombre"]}</td>
-    <td>{$item["ciudad"]}</td>
-    <td>{$item["plazas"]}</td>
-    <td><form method="POST" action="listarEvento.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_evento"]}>
-        </form></td>
-</tr>
-{/foreach}
-        </table>
-                 <form method="POST" action="inicioEmpresa.php">
-            <input type="submit" name="volver" value="Volver a Empresa">         
+
+        <form method="POST" action="login.php">
+    <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
         </form>
+     <div id="contenedor">
+         <img src='imagenes/imagen1.png' width='150px' heigth='150px'>
+         <a href="inicioEmpresa.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
+         <h2>JUEGOS   EVENTOS</h2>
+         <form method="POST" action="listarEvento.php">
+            <input type="submit" name="listar" value="Listar Eventos">         
+        </form>
+     </div>
     </body>
 </html>
