@@ -70,21 +70,14 @@ margin-left: 25px;
 
     </style>
     <body>
-
-        <form method="POST" action="login.php">
-    <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
-        </form>
-     <div id="contenedor">
-         <div id="encabezado"><h2>Crear Evento:</h2></div>
-         <form method="POST" action="inicioEmpresa.php">
-             Nombre del evento:  <input type="text" name="event"><br><br>
-            Ciudad:  <input type="text" name="city"><br><br>
-            Plazas:  <input type="text" name="plazas"><br><br>
-            <input type="submit" name="anadir" value="Añadir Evento">         
-        </form>
-         <form method="POST" action="listarEvento.php">
-            <input type="submit" name="listar" value="Listar Eventos">         
-        </form>
-     </div>
+        <table><tr><th>Nombre del Evento</th><th>Ciudad</th><th>Plazas</th></tr>
+{foreach $array as $item}
+<tr>
+    <td>{$item["nombre"]}</td>
+    <td>{$item["ciudad"]}</td>
+    <td>{$item["plazas"]}</td>
+</tr>
+{/foreach}
+        </table>
     </body>
 </html>

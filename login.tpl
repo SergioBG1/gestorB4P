@@ -143,7 +143,7 @@ height: 30px;
             <fieldset>
             {$frase}
             <input type="text" id="usuario" name="user" placeholder="Usuario"><br><br>
-            <input type="text" id="pass" name="pass" placeholder="Contraseña"><br><br>
+            <input type="password" id="pass" name="pass" placeholder="Contraseña"><br><br>
             <input type="submit" name="enviar" value="Entrar">         
             </fieldset>
            
