@@ -61,6 +61,17 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }  
+    
+     function listarProductos($id) {
+        try {
+            $con = "SELECT * from producto where id_empresa_p=:id";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id' => $id]);
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  
      
 
 /**
@@ -79,6 +90,15 @@ class BD {
             $con = "INSERT INTO `evento`(`nombre`, `ciudad`, `plazas`, `id_empresa_e`)  VALUES (:evento, :ciudad, :plazas, :id);";
             $consulta = $this->conexion->prepare($con);
             $consulta->execute(['evento' => $evento, 'ciudad' => $ciudad, 'plazas' => $plazas, 'id' => $id]);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function creaProducto($producto, $cantidad, $plataforma, $id) {
+        try {
+            $con = "INSERT INTO `producto`(`nombre`, `cantidad`, `plataforma`, `id_empresa_p`)  VALUES (:producto, :cantidad, :plataforma, :id);";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['producto' => $producto, 'cantidad' => $cantidad, 'plataforma' => $plataforma, 'id' => $id]);
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
         }

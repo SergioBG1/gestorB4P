@@ -75,10 +75,14 @@ margin-left: 25px;
     <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
         </form>
      <div id="contenedor">
-         <a href="registroProducto.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
-         <a href="inicioEmpresa.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
-         <h2>JUEGOS   EVENTOS</h2>
-         <form method="POST" action="listarEvento.php">
+         <div id="encabezado"><h2>Crear Evento:</h2></div>
+         <form method="POST" action="registroProducto.php">
+             Nombre del producto:  <input type="text" name="product"><br><br>
+            Cantidad:  <input type="text" name="cantidad"><br><br>
+            Plataforma:  <input type="text" name="plataforma"><br><br>
+            <input type="submit" name="anadir" value="Añadir Producto">         
+        </form>
+         <form method="POST" action="registroProducto.php">
             <input type="submit" name="listar" value="Listar Eventos">         
         </form>
      </div>
