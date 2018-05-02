@@ -70,22 +70,24 @@ margin-left: 25px;
 
     </style>
     <body>
-        <h1>Listado de Eventos de la empresa {$nombre}</h1>
-        <table><tr><th>Nombre del Evento</th><th>Ciudad</th><th>Plazas</th></tr>
-{foreach $array as $item}
-<tr>
-    <td>{$item["nombre"]}</td>
-    <td>{$item["ciudad"]}</td>
-    <td>{$item["plazas"]}</td>
-    <td><form method="POST" action="listarEvento.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_evento"]}>
-        </form></td>
-</tr>
-{/foreach}
-        </table>
-                 <form method="POST" action="inicioEmpresa.php">
+
+        <form method="POST" action="login.php">
+    <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
+        </form>
+     <div id="contenedor">
+         <div id="encabezado"><h2>Crear Evento:</h2></div>
+         <form method="POST" action="inicioEmpresa.php">
+             Nombre del evento:  <input type="text" name="event"><br><br>
+            Ciudad:  <input type="text" name="city"><br><br>
+            Plazas:  <input type="text" name="plazas"><br><br>
+            <input type="submit" name="anadir" value="Añadir Evento">         
+        </form>
+         <form method="POST" action="listarEvento.php">
+            <input type="submit" name="listar" value="Listar Eventos">         
+        </form>
+             <form method="POST" action="perfilEmpresa.php">
             <input type="submit" name="volver" value="Volver a Empresa">         
         </form>
+     </div>
     </body>
 </html>

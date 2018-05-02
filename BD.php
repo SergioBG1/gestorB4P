@@ -51,6 +51,16 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }  
+    function consigueDatos($usuario) {
+        try {
+            $con = "SELECT `direccion`, `correo` from empresa where usuario=:user";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['user' => $usuario]);
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    } 
          function listarEventos($id) {
         try {
             $con = "SELECT * from evento where id_empresa_e=:id";
@@ -94,6 +104,16 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
+    function actualizaPefilEmpresa($correo, $direccion, $user) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `empresa` SET `direccion`=:direccion,`correo`=:correo where usuario=:user;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['user' => $user, 'direccion' => $direccion, 'correo' => $correo]);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     function creaProducto($producto, $cantidad, $plataforma, $id) {
         try {
             $con = "INSERT INTO `producto`(`nombre`, `cantidad`, `plataforma`, `id_empresa_p`)  VALUES (:producto, :cantidad, :plataforma, :id);";
@@ -106,6 +126,15 @@ class BD {
     function eliminaEvento($id) {
         try {
             $con = "DELETE FROM `evento` WHERE id_evento=:id;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id' => $id]);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+        function eliminaProducto($id) {
+        try {
+            $con = "DELETE FROM `producto` WHERE id_producto=:id;";
             $consulta = $this->conexion->prepare($con);
             $consulta->execute(['id' => $id]);
         } catch (PDOException $e) {

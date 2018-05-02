@@ -70,22 +70,20 @@ margin-left: 25px;
 
     </style>
     <body>
-        <h1>Listado de Eventos de la empresa {$nombre}</h1>
-        <table><tr><th>Nombre del Evento</th><th>Ciudad</th><th>Plazas</th></tr>
-{foreach $array as $item}
-<tr>
-    <td>{$item["nombre"]}</td>
-    <td>{$item["ciudad"]}</td>
-    <td>{$item["plazas"]}</td>
-    <td><form method="POST" action="listarEvento.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_evento"]}>
-        </form></td>
-</tr>
-{/foreach}
-        </table>
-                 <form method="POST" action="inicioEmpresa.php">
+
+        <form method="POST" action="login.php">
+    <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
+        </form>
+     <div id="contenedor">
+         <div id="encabezado"> <h1>Edición de perfil de {$nombre}</h1></div>
+         <form method="POST" action="editarPerfil.php">
+             Dirección:  <input type="text" name="direccion" value="{$direccion}"><br><br>
+            Correo:  <input type="text" name="mail" value="{$correo}"><br><br>
+            <input type="submit" name="cambiar" value="Guardar Cambios">         
+        </form>
+             <form method="POST" action="perfilEmpresa.php">
             <input type="submit" name="volver" value="Volver a Empresa">         
         </form>
+     </div>
     </body>
 </html>

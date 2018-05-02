@@ -76,10 +76,10 @@ margin-left: 25px;
         </form>
      <div id="contenedor">
          <a href="registroProducto.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
-         <a href="inicioEmpresa.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
+         <a href="registroEvento.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
          <h2>JUEGOS   EVENTOS</h2>
-         <form method="POST" action="listarEvento.php">
-            <input type="submit" name="listar" value="Listar Eventos">         
+         <form method="POST" action="editarPerfil.php">
+            <input type="submit" name="editar" value="Editar mi perfil">         
         </form>
      </div>
     </body>

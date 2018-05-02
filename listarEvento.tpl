@@ -84,7 +84,7 @@ margin-left: 25px;
 </tr>
 {/foreach}
         </table>
-                 <form method="POST" action="inicioEmpresa.php">
+                 <form method="POST" action="registroEvento.php">
             <input type="submit" name="volver" value="Volver a Empresa">         
         </form>
     </body>

@@ -14,18 +14,17 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-    // $objetos = $bd->obtieneDatosEmpresas($_SESSION['usuario']);
-    $array = $bd->listarEventos($_SESSION['id']);
-    $smarty->assign("array", $array);
-    $smarty->assign("nombre", $_SESSION['usuario']);
-    if(isset($_POST['eliminar'])){
-       $bd->eliminaEvento($_POST['valor']);
-       header("Location:listarEvento.php");
-    }
-    $smarty->display('listarEvento.tpl');
+   // $objetos = $bd->obtieneDatosEmpresas($_SESSION['usuario']);
+     if (isset($_POST['anadir'])) {
+         $evento=$_POST['event'];
+         $ciudad=$_POST['city'];
+         $plazas=$_POST['plazas'];
+         $bd->creaEvento($evento, $ciudad, $plazas, $_SESSION['id']);
+        }                    
+    $smarty->display('registroEvento.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
-    echo "Acceso irregular. Volviendo a Empresa.";
-    header("Refresh:3,url=registroEvento.php");
+    echo "No puedes acceder sin loguear. ERROR";
+    header("Refresh:3,url=login.php");
 }
 ?>
 

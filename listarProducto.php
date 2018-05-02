@@ -19,7 +19,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->assign("array", $array);
     $smarty->assign("nombre", $_SESSION['usuario']);
     if(isset($_POST['eliminar'])){
-       $bd->eliminaEvento($_POST['valor']);
+       $bd->eliminaProducto($_POST['valor']);
        header("Location:listarProducto.php");
     }
     $smarty->display('listarProducto.tpl');

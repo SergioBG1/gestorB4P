@@ -75,15 +75,18 @@ margin-left: 25px;
     <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
         </form>
      <div id="contenedor">
-         <div id="encabezado"><h2>Crear Evento:</h2></div>
+         <div id="encabezado"><h2>Crear Producto:</h2></div>
          <form method="POST" action="registroProducto.php">
              Nombre del producto:  <input type="text" name="product"><br><br>
             Cantidad:  <input type="text" name="cantidad"><br><br>
             Plataforma:  <input type="text" name="plataforma"><br><br>
             <input type="submit" name="anadir" value="Añadir Producto">         
         </form>
-         <form method="POST" action="registroProducto.php">
-            <input type="submit" name="listar" value="Listar Eventos">         
+         <form method="POST" action="listarProducto.php">
+            <input type="submit" name="listar" value="Listar Productos">         
+        </form>
+             <form method="POST" action="perfilEmpresa.php">
+            <input type="submit" name="volver" value="Volver a Empresa">         
         </form>
      </div>
     </body>
