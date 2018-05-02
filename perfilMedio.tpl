@@ -70,22 +70,17 @@ margin-left: 25px;
 
     </style>
     <body>
-        <h1>Listado de Productos de la empresa {$nombre}</h1>
-        <table><tr><th>Nombre del Evento</th><th>Ciudad</th><th>Plazas</th></tr>
-{foreach $array as $item}
-<tr>
-    <td>{$item["nombre"]}</td>
-    <td>{$item["plataforma"]}</td>
-    <td>{$item["cantidad"]}</td>
-    <td><form method="POST" action="listarProducto.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
-        </form></td>
-</tr>
-{/foreach}
-        </table>
-                 <form method="POST" action="perfilEmpresa.php">
-            <input type="submit" name="volver" value="Volver a Empresa">         
+
+        <form method="POST" action="login.php">
+    <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
         </form>
+     <div id="contenedor">
+         <a href="listadoProductoMedio.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
+         <a href="listadoEventoMedio.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
+         <h2>JUEGOS   EVENTOS</h2>
+         <form method="POST" action="editarPerfilMedio.php">
+            <input type="submit" name="editar" value="Editar mi perfil">         
+        </form>
+     </div>
     </body>
 </html>

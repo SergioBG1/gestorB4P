@@ -65,24 +65,22 @@ margin:20px;}
 height:1px;
 table{
 margin-left: 25px;
-
 }
 
     </style>
     <body>
-        <h1>Listado de Productos de la empresa {$nombre}</h1>
-        <table><tr><th>Nombre del Evento</th><th>Ciudad</th><th>Plazas</th></tr>
+        <h1>Prodcutos disponibles para el medio {$nombre}</h1>
+        <table><tr><th>Producto</th><th>Nombre</th><th>Plataformas</th><th>Empresa</th></tr>
 {foreach $array as $item}
 <tr>
     <td>{$item["nombre"]}</td>
     <td>{$item["plataforma"]}</td>
     <td>{$item["cantidad"]}</td>
-    <td><form method="POST" action="listarProducto.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
-        </form></td>
+    <td>{$empresa[{$num}]}</td>
 </tr>
+ <input type='hidden' value='{$num++}'>
 {/foreach}
+
         </table>
                  <form method="POST" action="perfilEmpresa.php">
             <input type="submit" name="volver" value="Volver a Empresa">         

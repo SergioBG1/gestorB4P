@@ -119,7 +119,7 @@ input {
 	display: block;
 	margin: 0 auto;
 	padding: 4px 0;
-	width: 190px;
+	width: 100px;
 }
 
 #ini fieldset input[type="submit"]:hover {
@@ -129,8 +129,6 @@ input {
 width:30px;
 height: 30px;
 }
-#cambiaTam{
-width:150px;}
 
         </style>
     </head>
@@ -140,14 +138,15 @@ width:150px;}
        
             <div id="ini">
                
-                <h2><img id="candado" src="./imagenes/usuario.png"> Elige un tipo de cuenta</h2>
-                 
-            <fieldset><form method="POST" action="login2.php">
-                    <input type="submit" name="enviar2" value="Empresas"></form> <br>
-             <form method="POST" action="login3.php">
-            <input type="submit" name="enviar2" value="Medios de comunicación" id="cambiaTam"></form> 
+                <h2><img id="candado" src="./imagenes/usuario.png"> Inicio de sesión de Medio</h2>
+                  <form method="POST" action="login3.php">
+            <fieldset>
+            {$frase}
+            <input type="text" id="usuario" name="user" placeholder="Usuario"><br><br>
+            <input type="password" id="pass" name="pass" placeholder="Contraseña"><br><br>
+            <input type="submit" name="enviar" value="Entrar">         
             </fieldset>
            
-      </div>
+        </form> </div>
     </body>
 </html>

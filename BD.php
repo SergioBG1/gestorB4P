@@ -40,12 +40,43 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
+    
+     function verificarMedio($usuario, $contra) {
+        try {
+            $prueba = 0;
+            $con = "SELECT * from medio where nombre='$usuario' && pass='$contra'";
+            $this->__construct();
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            while ($consulta->fetch()) {
+                $prueba++;
+            }
+            if ($prueba > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
       function consigueID($usuario) {
         try {
             $prueba = 0;
             $con = "SELECT `id_empresa` from empresa where usuario=:user";
             $consulta = $this->conexion->prepare($con);
             $consulta->execute(['user' => $usuario]);
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  
+    
+      function consigueNombre($id) {
+        try {
+            $con = "SELECT `usuario` from empresa where id_empresa=:id";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id' => $id]);
            return $consulta->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
@@ -82,7 +113,16 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }  
-     
+          function listarProductosMedio() {
+        try {
+            $con = "SELECT * from producto;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  
 
 /**
  * Obtiene los productos de la selección
