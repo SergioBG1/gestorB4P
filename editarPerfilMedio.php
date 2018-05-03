@@ -14,29 +14,40 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-
       $smarty->assign("nombre", $_SESSION['usuario']);
-       $datos= $bd->consigueDatos($_SESSION['usuario']);
+       $datos= $bd->consigueDatosMedio($_SESSION['usuario']);
       $correo= $datos[0]['correo'];
+      $seguidores= $datos[0]['seguidores'];
       $direccion= $datos[0]['direccion'];
-          $frases='';
+      $url= $datos[0]['url'];
+     $visitas= $datos[0]['visitas'];
+$frase='';
    // $objetos = $bd->obtieneDatosEmpresas($_SESSION['usuario']);
      if (isset($_POST['cambiar'])) {
          $correoNuevo=$_POST['mail'];
          $correo = $correoNuevo;
          $direccionNueva=$_POST['direccion'];
          $direccion = $direccionNueva;
-         $bd2=$bd->actualizaPefilEmpresa($correoNuevo, $direccionNueva, $_SESSION['usuario']);
-            if($bd2 != null){
-            $frases = "Se han realizado los cambios correctamente.";
+         $seguidoresNuevo = $_POST['seguidores'];
+         $seguidores = $seguidoresNuevo;
+         $urlNueva = $_POST['url'];
+         $url = $urlNueva;
+         $visitasNuevas = $_POST['visitas'];
+         $visitas = $visitasNuevas;
+        $bd2=$bd->actualizaPerfilMedio($correoNuevo, $direccionNueva,$visitas,$url,$seguidores, $_SESSION['usuario']);
+        if($bd2 != null){
+            $frase = "Se han realizado los cambios correctamente.";
         }else{
-             $frases = "Error durante los cambios.";
+             $frase = "Error durante los cambios.";
         }
         } 
-        $smarty->assign("frases", $frases);
+        $smarty->assign("frase", $frase);
       $smarty->assign("correo", $correo);
       $smarty->assign("direccion", $direccion);
-    $smarty->display('editarPerfil.tpl');
+      $smarty->assign("url", $url);
+      $smarty->assign("seguidores", $seguidores);
+      $smarty->assign("visitas", $visitas);
+    $smarty->display('editarPerfilMedio.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "No puedes acceder sin loguear. ERROR";
     header("Refresh:3,url=login.php");

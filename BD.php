@@ -92,6 +92,16 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     } 
+    function consigueDatosMedio($usuario) {
+        try {
+            $con = "SELECT `direccion`, `visitas`, `url`, `seguidores`, `correo` from medio where nombre=:user";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['user' => $usuario]);
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    } 
          function listarEventos($id) {
         try {
             $con = "SELECT * from evento where id_empresa_e=:id";
@@ -149,7 +159,19 @@ class BD {
             //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
             $con = "UPDATE `empresa` SET `direccion`=:direccion,`correo`=:correo where usuario=:user;";
             $consulta = $this->conexion->prepare($con);
-            $consulta->execute(['user' => $user, 'direccion' => $direccion, 'correo' => $correo]);
+            $resultado = $consulta->execute(['user' => $user, 'direccion' => $direccion, 'correo' => $correo]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function actualizaPerfilMedio($correo, $direccion,$visitas, $url,$seguidores, $user) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `medio` SET `direccion`=:direccion,`correo`=:correo,`seguidores`=:seguidores,`url`=:url,`visitas`=:visitas  where nombre=:user;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['user' => $user, 'direccion' => $direccion, 'correo' => $correo, 'visitas' => $visitas, 'url' => $url, 'seguidores' => $seguidores]);
+            return $resultado;
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
         }

@@ -76,13 +76,16 @@ margin-left: 25px;
         </form>
      <div id="contenedor">
          <div id="encabezado"> <h1>Edición de perfil de {$nombre}</h1></div>
-         <form method="POST" action="editarPerfil.php">
-              {$frases}<br>
+         <form method="POST" action="editarPerfilMedio.php">
+             {$frase}<br>
              Dirección:  <input type="text" name="direccion" value="{$direccion}"><br><br>
             Correo:  <input type="text" name="mail" value="{$correo}"><br><br>
+            Visitas:  <input type="text" name="visitas" value="{$visitas}"><br><br>
+            Url:  <input type="text" name="url" value="{$url}"><br><br>
+            Seguidores:  <input type="text" name="seguidores" value="{$seguidores}"><br><br>
             <input type="submit" name="cambiar" value="Guardar Cambios">         
         </form>
-             <form method="POST" action="perfilEmpresa.php">
+             <form method="POST" action="perfilMedio.php">
             <input type="submit" name="volver" value="Volver a Empresa">         
         </form>
      </div>
