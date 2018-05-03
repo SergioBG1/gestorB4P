@@ -70,46 +70,38 @@ margin:20px;}
 height:1px;
 table{
 margin-left: 25px;
-
 }
 
     </style>
-
     <body>
-        <h1>Listado de Productos de la empresa {$nombre}</h1>
+        <h1>Prodcutos disponibles para el medio {$nombre}</h1>
 
-     
-                <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
+<table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
 		<thead>
 			<tr style="height: 18px; border: 2px solid #000000; background-color: #e3e3e3; ">
-				<th style="text-align: left;">Nombre del Producto</th>
-				<th style="text-align: left;">Plataforma</th>
-				<th style="text-align: left;">Cantidad</th>
-				<th style="text-align: left;"></th>
+				<th style="text-align: left;">Nombre del Evento</th>
+				<th style="text-align: left;">Ciudad</th>
+				<th style="text-align: left;">Plazas</th>
+				<th style="text-align: left;">Empresa</th>
 			</tr>
 		</thead>
 		<tbody>
-			  {foreach $array as $item}
+			{foreach $array as $item}
 <tr>
     <td>{$item["nombre"]}</td>
-    <td>{$item["plataforma"]}</td>
-    <td>{$item["cantidad"]}</td>
-    <td><form method="POST" action="listarProducto.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
-        </form></td>
+    <td>{$item["ciudad"]}</td>
+    <td>{$item["plazas"]}</td>
+    <td>{$empresa[{$num}]}</td>
 </tr>
-            {/foreach}
+ <input type='hidden' value='{$num++}'>
+{/foreach}
+
 			
 		</tbody>
 	</table>
-                 <form method="POST" action="perfilEmpresa.php">
-            <input type="submit" name="volver" value="Volver a Empresa">         
-        </form>
-          <!-- jQuery -->
-	<!-- El JavaScript de DataTables -->
- 
-	<script language="javascript">
+                 <form method="POST" action="perfilMedio.php">
+            <input type="submit" name="volver" value="Volver a Medio">         
+        </form>  <script language="javascript">
         //Usamos DataTable y lo traducimos a nuestro idioma
 		$('#tabla_de_miembros').DataTable( {
  
@@ -179,7 +171,5 @@ margin-left: 25px;
          
 	</script>
   
-  
-    
     </body>
 </html>

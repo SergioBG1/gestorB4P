@@ -133,6 +133,28 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }  
+    
+      function listarProductosMedioCarousel() {
+        try {
+            $con = "SELECT * from producto ORDER BY id_producto DESC;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  
+    
+  function listarEventosMedio() {
+        try {
+            $con = "SELECT * from evento;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+           return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  
 
 /**
  * Obtiene los productos de la selección
