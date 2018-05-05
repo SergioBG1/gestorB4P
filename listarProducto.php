@@ -24,8 +24,9 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     }
     $smarty->display('listarProducto.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
-    echo "Acceso irregular. Volviendo a Medio.";
-    header("Refresh:3,url=inicioMedio.php");
+                    echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
+'>Acceso irregular. Volviendo a Medio.</div></body>";
+    header("Refresh:3,url=perfilMedio.php");
 }
 ?>
 

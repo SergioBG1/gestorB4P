@@ -31,7 +31,7 @@ margin-top:10px;}
     <body>
 
         <form method="POST" action="login.php">
-    <input type="submit" class="btn btn-info" name="vuelve" value="Volver a inicio"> 
+    <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
         </form>
      <div id="medio">
          <div id="prueba">
