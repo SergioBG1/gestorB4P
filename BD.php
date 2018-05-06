@@ -198,6 +198,28 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
+    function actualizaProducto($nombre, $cantidad, $plataforma, $id) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `producto` SET `nombre`=:nombre,`cantidad`=:cantidad, `plataforma`=:plataforma where id_producto=:id;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['nombre' => $nombre, 'cantidad' => $cantidad, 'plataforma' => $plataforma,'id' => $id,]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function actualizaEvento($nombre, $ciudad, $plazas, $id) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `evento` SET `nombre`=:nombre,`ciudad`=:ciudad, `plazas`=:plazas where id_evento=:id;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['nombre' => $nombre, 'ciudad' => $ciudad, 'plazas' => $plazas,'id' => $id,]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     function creaProducto($producto, $cantidad, $plataforma, $id) {
         try {
             $con = "INSERT INTO `producto`(`nombre`, `cantidad`, `plataforma`, `id_empresa_p`)  VALUES (:producto, :cantidad, :plataforma, :id);";

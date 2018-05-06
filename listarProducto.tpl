@@ -39,6 +39,7 @@ body{
 				<th style="text-align: left;">Plataforma</th>
 				<th style="text-align: left;">Cantidad</th>
 				<th style="text-align: left;"></th>
+                                   <th style="text-align: left;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +48,13 @@ body{
     <td>{$item["nombre"]}</td>
     <td>{$item["plataforma"]}</td>
     <td>{$item["cantidad"]}</td>
+    <td><form method="POST" action="editarProducto.php">
+            <input type="submit" name="editar" value="Editar">
+            <input type="hidden" name="nombre" value={$item["nombre"]}>
+            <input type="hidden" name="plataforma" value={$item["plataforma"]}>
+            <input type="hidden" name="cantidad" value={$item["cantidad"]}>
+            <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
+        </form></td>
     <td><form method="POST" action="listarProducto.php">
             <input type="submit" name="eliminar" value="Eliminar">
             <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>

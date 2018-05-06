@@ -37,6 +37,7 @@ body{
 				<th style="text-align: left;">Ciudad</th>
 				<th style="text-align: left;">Plazas</th>
 				<th style="text-align: left;"></th>
+                                <th style="text-align: left;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,6 +46,13 @@ body{
     <td>{$item["nombre"]}</td>
     <td>{$item["ciudad"]}</td>
     <td>{$item["plazas"]}</td>
+       <td><form method="POST" action="editarEvento.php">
+            <input type="submit" name="editar" value="Editar">
+            <input type="hidden" name="nombre" value={$item["nombre"]}>
+            <input type="hidden" name="ciudad" value={$item["ciudad"]}>
+            <input type="hidden" name="plazas" value={$item["plazas"]}>
+            <input type="hidden" id="valor" name="valor" value={$item["id_evento"]}>
+        </form></td>
     <td><form method="POST" action="listarEvento.php">
             <input type="submit" name="eliminar" value="Eliminar">
             <input type="hidden" id="valor" name="valor" value={$item["id_evento"]}>
