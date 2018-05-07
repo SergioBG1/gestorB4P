@@ -198,23 +198,23 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
-    function actualizaProducto($nombre, $cantidad, $plataforma, $id) {
+    function actualizaProducto($nombre, $cantidad, $plataforma, $id, $congelado) {
         try {
             //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
-            $con = "UPDATE `producto` SET `nombre`=:nombre,`cantidad`=:cantidad, `plataforma`=:plataforma where id_producto=:id;";
+            $con = "UPDATE `producto` SET `nombre`=:nombre,`cantidad`=:cantidad, `plataforma`=:plataforma, `congelado`=:congelado where id_producto=:id;";
             $consulta = $this->conexion->prepare($con);
-            $resultado = $consulta->execute(['nombre' => $nombre, 'cantidad' => $cantidad, 'plataforma' => $plataforma,'id' => $id,]);
+            $resultado = $consulta->execute(['nombre' => $nombre, 'cantidad' => $cantidad, 'plataforma' => $plataforma,'id' => $id, 'congelado' => $congelado]);
             return $resultado;
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
         }
     }
-    function actualizaEvento($nombre, $ciudad, $plazas, $id) {
+    function actualizaEvento($nombre, $ciudad, $plazas, $id, $congelado) {
         try {
             //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
-            $con = "UPDATE `evento` SET `nombre`=:nombre,`ciudad`=:ciudad, `plazas`=:plazas where id_evento=:id;";
+            $con = "UPDATE `evento` SET `nombre`=:nombre,`ciudad`=:ciudad, `plazas`=:plazas, `congelado`=:congelado where id_evento=:id;";
             $consulta = $this->conexion->prepare($con);
-            $resultado = $consulta->execute(['nombre' => $nombre, 'ciudad' => $ciudad, 'plazas' => $plazas,'id' => $id,]);
+            $resultado = $consulta->execute(['nombre' => $nombre, 'ciudad' => $ciudad, 'plazas' => $plazas,'id' => $id, 'congelado' => $congelado]);
             return $resultado;
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();

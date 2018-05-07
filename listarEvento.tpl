@@ -52,6 +52,7 @@ body{
             <input type="hidden" name="ciudad" value={$item["ciudad"]}>
             <input type="hidden" name="plazas" value={$item["plazas"]}>
             <input type="hidden" id="valor" name="valor" value={$item["id_evento"]}>
+            <input type="hidden" id="congelado" name="congelado" value={$item["congelado"]}>
         </form></td>
     <td><form method="POST" action="listarEvento.php">
             <input type="submit" name="eliminar" value="Eliminar">

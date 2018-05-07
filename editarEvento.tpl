@@ -31,6 +31,10 @@ display:inline-block;}
              Nombre del evento:  <input type="text" name="nombre" value="{$evento}"><br><br>
             Ciudad:  <input type="text" name="ciudad" value="{$ciudad}"><br><br>
             Plazas:  <input type="text" name="plazas" value="{$plazas}"><br><br>
+                 Congelado:  <select name="congelado">    
+       <option value="SI" {if $congelado == 'SI'}selected{/if}>SI</option>
+       <option value="NO" {if $congelado == 'NO'}selected{/if}>NO</option>
+   </select><br><br>
                 <input type="hidden" id="valor" name="valor" value="{$id}"}>
             <input type="submit" class="btn btn-success" name="cambiar" value="Cambiar Evento">         
         </form>

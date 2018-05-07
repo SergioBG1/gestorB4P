@@ -36,6 +36,7 @@ body{
 				<th style="text-align: left;">Plataformas</th>
 				<th style="text-align: left;">Cantidad</th>
 				<th style="text-align: left;">Empresa</th>
+                                <th style="text-align: left;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,6 +46,8 @@ body{
     <td>{$item["plataforma"]}</td>
     <td>{$item["cantidad"]}</td>
     <td>{$empresa[{$num}]}</td>
+    <td><form method="POST" action="#"><input type="submit" name="solicitar" value="Solicitar"  {if $item['congelado'] == 'SI'}disabled{/if}>
+    </form></td>
 </tr>
  <input type='hidden' value='{$num++}'>
 {/foreach}

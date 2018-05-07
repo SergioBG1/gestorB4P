@@ -35,6 +35,10 @@ display:inline-block;}
        <option value="ONE"  {if $plataforma == 'ONE'}selected{/if}>ONE</option>
        <option value="PC"  {if $plataforma == 'PC'}selected{/if}>PC</option>
    </select><br><br>
+     Congelado:  <select name="congelado">    
+       <option value="SI" {if $congelado == 'SI'}selected{/if}>SI</option>
+       <option value="NO" {if $congelado == 'NO'}selected{/if}>NO</option>
+   </select><br><br>
     <input type="hidden" id="valor" name="valor" value="{$id}"}>
             <input type="submit" class="btn btn-success" name="cambiar" value="Cambiar Producto">         
         </form>

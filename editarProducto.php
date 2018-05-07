@@ -19,9 +19,10 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null && (
     $plataforma = $_POST['plataforma'];
     $cantidad = $_POST['cantidad'];
     $id=$_POST['valor'];
+    $congelado=$_POST['congelado'];
     if(isset($_POST['cambiar'])){
 $bd= new BD();
-$bd->actualizaProducto($nombre, $cantidad, $plataforma, $id);   
+$bd->actualizaProducto($nombre, $cantidad, $plataforma, $id, $congelado);   
     }
     
     
@@ -29,6 +30,7 @@ $bd->actualizaProducto($nombre, $cantidad, $plataforma, $id);
     $smarty->assign('plataforma',$plataforma);
     $smarty->assign('cantidad',$cantidad);
     $smarty->assign('id',$id);
+    $smarty->assign('congelado',$congelado);
 
     $smarty->display('editarProducto.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio

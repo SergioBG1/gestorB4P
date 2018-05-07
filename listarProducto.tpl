@@ -54,6 +54,7 @@ body{
             <input type="hidden" name="plataforma" value={$item["plataforma"]}>
             <input type="hidden" name="cantidad" value={$item["cantidad"]}>
             <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
+            <input type="hidden" id="congelado" name="congelado" value={$item["congelado"]}>
         </form></td>
     <td><form method="POST" action="listarProducto.php">
             <input type="submit" name="eliminar" value="Eliminar">
