@@ -139,7 +139,7 @@ height: 30px;
             <div id="ini">
                
                 <h2><img id="candado" src="./imagenes/usuario.png"> Inicia Sesión de Empresa</h2>
-                  <form method="POST" action="login.php">
+                  <form method="POST" action="login2.php">
             <fieldset>
             {$frase}
             <input type="text" id="usuario" name="user" placeholder="Usuario"><br><br>

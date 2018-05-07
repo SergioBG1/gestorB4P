@@ -24,6 +24,9 @@ body{
 	font-size: 16px;
 	line-height: 1.5em;
 }
+input[type="submit"]:disabled {
+    background: #ed8e8e;
+}
     </style>
     <body>      <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 

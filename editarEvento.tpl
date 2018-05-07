@@ -27,6 +27,7 @@ display:inline-block;}
         </form>
      <div id="contenedor">
          <div id="encabezado"><h2>Editar Evento:</h2></div>
+                   {$frases}<br>
          <form method="POST" action="editarEvento.php">
              Nombre del evento:  <input type="text" name="nombre" value="{$evento}"><br><br>
             Ciudad:  <input type="text" name="ciudad" value="{$ciudad}"><br><br>

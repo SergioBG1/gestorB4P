@@ -27,6 +27,7 @@ display:inline-block;}
         </form>
      <div id="contenedor">
          <div id="encabezado"><h2>Crear Evento:</h2></div>
+           {$frases}<br>
          <form method="POST" action="registroEvento.php">
              Nombre del evento:  <input type="text" name="event"><br><br>
             Ciudad:  <input type="text" name="city"><br><br>

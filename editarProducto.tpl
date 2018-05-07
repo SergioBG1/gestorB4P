@@ -27,6 +27,7 @@ display:inline-block;}
         </form>
      <div id="contenedor">
          <div id="encabezado"><h2>Cambiar Producto:</h2></div>
+          {$frases}<br>
          <form method="POST" action="editarProducto.php">
              Nombre del producto:  <input type="text" name="nombre" value="{$nombre}"><br><br>
             Cantidad:  <input type="text" name="cantidad" value="{$cantidad}"><br><br>

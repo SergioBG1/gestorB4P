@@ -27,6 +27,7 @@ display:inline-block;}
         </form>
      <div id="contenedor">
          <div id="encabezado"><h2>Crear Producto:</h2></div>
+         {$frases}<br>
          <form method="POST" action="registroProducto.php">
              Nombre del producto:  <input type="text" name="product"><br><br>
             Cantidad:  <input type="text" name="cantidad"><br><br>
