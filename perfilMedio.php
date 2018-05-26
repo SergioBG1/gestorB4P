@@ -29,6 +29,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
         $i++;
     }
     //Enviamos variables a tpl.php
+        $smarty->assign('usuario',$_SESSION['usuario']);
     $smarty->assign("datos", $datos);
     $smarty->assign("imagenFinales", $imagenFinales);
     $smarty->display('perfilMedio.tpl');

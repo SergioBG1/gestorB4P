@@ -21,23 +21,19 @@
         $frase = '';
         $smarty->assign("frase", $frase);
         //Comprobación de usuarios
-        if (isset($_POST['enviar'])) {
-            $user = $_POST['user'];
-            $contrasena = md5($_POST['pass']);
-            $bd = new BD();
-            $a = $bd->verificar($user, $contrasena);
-            if ($a === true) {
-                $_SESSION['usuario'] = $user;
-                $_SESSION['pass'] = $contrasena;
-                $id = $bd->consigueID("sergio");
-                $_SESSION['id'] = $id[0]['id_empresa'];
-                header("Location:perfilEmpresa.php");
-            } else {
-                $frase = "Usuario introducido incorrecto<br>";
-                $smarty->assign("frase", $frase);
-            }
-        }
-
+      
+         if(isset($_POST['bajar'])){
+             $bd = new BD();
+        $bd->eliminaEmpresa($_POST['usuario']);
+        $frase="El usuario ha sido dado de baja de la base de datos.";
+         $smarty->assign("frase", $frase);
+    }
+   if(isset($_POST['bajar2'])){
+             $bd = new BD();
+        $bd->eliminaMedio($_POST['usuario']);
+        $frase="El usuario ha sido dado de baja de la base de datos.";
+         $smarty->assign("frase", $frase);
+    }
         $smarty->display('login.tpl');
         ?>
 

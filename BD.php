@@ -130,7 +130,16 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
-
+function consigueDatosMedioID($id_medio) {
+        try {
+            $con = "SELECT `direccion`, `visitas`, `url`, `seguidores`, `correo`, `nombre` from medio where id_medio=:id_medio";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id_medio' => $id_medio]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Retorna lista de eventos en función de empresa
      * @param int $id
@@ -223,6 +232,241 @@ class BD {
             $consulta = $this->conexion->prepare($con);
             $resultado = $consulta->execute(['evento' => $evento, 'ciudad' => $ciudad, 'plazas' => $plazas, 'id' => $id]);
             return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    
+   function peticionMedio($user, $correo, $pass, $direccion, $visitas, $url, $seguidores) {
+        try {
+            $visitas= (int) $visitas;
+            $seguidores= (int) $seguidores;
+            $con = "INSERT INTO `peticionmedio`(`nombre`, `direccion`, `pass`, `visitas`, `url`, `seguidores`, `correo`)  VALUES (:nombre, :direccion, :pass, :visitas, :url, :seguidores, :correo);";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['nombre' => $user,'direccion' => $direccion, 'correo' => $correo, 'pass' => $pass, 'visitas' => $visitas, 'url' => $url, 'seguidores' => $seguidores]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function anadirMedio($user, $correo, $pass, $direccion, $visitas, $url, $seguidores) {
+        try {
+            $visitas= (int) $visitas;
+            $seguidores= (int) $seguidores;
+            $con = "INSERT INTO `medio`(`nombre`, `direccion`, `pass`, `visitas`, `url`, `seguidores`, `correo`)  VALUES (:nombre, :direccion, :pass, :visitas, :url, :seguidores, :correo);";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['nombre' => $user,'direccion' => $direccion, 'correo' => $correo, 'pass' => $pass, 'visitas' => $visitas, 'url' => $url, 'seguidores' => $seguidores]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function listarPeticionMedio() {
+        try {
+            $con = "SELECT * from peticionmedio where estado='pendiente';";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function consigueIDMedio($nombre) {
+        try {
+            $con = "SELECT id_medio from medio where nombre=:nombre;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['nombre' => $nombre]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function consigueDatosProducto($id_producto) {
+        try {
+            $con = "SELECT * from producto where id_producto=:id_producto;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id_producto' => $id_producto]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function consigueDatosEvento($id_evento) {
+        try {
+            $con = "SELECT * from evento where id_evento=:id_evento;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id_evento' => $id_evento]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function cogeDatosMedio($correo) {
+        try {
+            $con = "SELECT * from peticionmedio where correo=:correo;";
+            $consulta = $this->conexion->prepare($con);
+             $consulta->execute(['correo' => $correo]);
+              return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function listarPeticionMedioAceptadas() {
+        try {
+            $con = "SELECT * from peticionmedio where estado='aceptado' order by id_peticion DESC LIMIT 0, 5;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function listarPeticionMedioAceptadasProducto($id_medio_u) {
+        try {
+            $con = "SELECT * from peticionproducto where estado='aceptado' AND id_medio_u=:id_medio_u;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id_medio_u' => $id_medio_u]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function listarPeticionMedioAceptadasEvento($id_medio_u) {
+        try {
+            $con = "SELECT * from peticionevento where estado='aceptado' AND id_medio_u=:id_medio_u;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['id_medio_u' => $id_medio_u]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function listarPeticionProducto($id_empresa) {
+        try {
+            $con = "SELECT * from peticionproducto where id_empresa=:id_empresa AND estado='pendiente'";
+            $consulta = $this->conexion->prepare($con);
+             $consulta->execute(['id_empresa' => $id_empresa]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function listarPeticionEvento($id_empresa) {
+        try {
+            $con = "SELECT * from peticionevento where id_empresa=:id_empresa AND estado='pendiente'";
+            $consulta = $this->conexion->prepare($con);
+             $consulta->execute(['id_empresa' => $id_empresa]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function listarPeticionProducto2($id_empresa) {
+        try {
+            $con = "SELECT * from peticionproducto where id_empresa=:id_empresa AND estado='aceptado'";
+            $consulta = $this->conexion->prepare($con);
+             $consulta->execute(['id_empresa' => $id_empresa]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+            function listarPeticionEvento2($id_empresa) {
+        try {
+            $con = "SELECT * from peticionevento where id_empresa=:id_empresa AND estado='aceptado'";
+            $consulta = $this->conexion->prepare($con);
+             $consulta->execute(['id_empresa' => $id_empresa]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function anadirPeticionProducto($id_medio_u,$id_producto_u,$id_empresa) {
+         try {
+            $con = "INSERT INTO `peticionproducto`(`id_medio_u`, `id_producto_u`, `id_empresa`)  VALUES (:id_medio_u, :id_producto_u, :id_empresa);";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['id_medio_u' => $id_medio_u,'id_producto_u' => $id_producto_u, 'id_empresa' => $id_empresa]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function anadirPeticionEvento($id_medio_u,$id_evento_u,$id_empresa) {
+         try {
+            $con = "INSERT INTO `peticionevento`(`id_medio_u`, `id_evento_u`, `id_empresa`)  VALUES (:id_medio_u, :id_evento_u, :id_empresa);";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['id_medio_u' => $id_medio_u,'id_evento_u' => $id_evento_u, 'id_empresa' => $id_empresa]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function listarPeticionesProductoMedio($id_medio_u) {
+        try {
+            $con = "SELECT id_producto_u from peticionproducto where id_medio_u=:id_medio_u;";
+            $consulta = $this->conexion->prepare($con);
+          $consulta->execute(['id_medio_u' => $id_medio_u]);
+              return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function listarPeticionesEventoMedio($id_medio_u) {
+        try {
+            $con = "SELECT id_evento_u from peticionevento where id_medio_u=:id_medio_u;";
+            $consulta = $this->conexion->prepare($con);
+          $consulta->execute(['id_medio_u' => $id_medio_u]);
+              return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function listarPeticionMedioRechazadas() {
+        try {
+            $con = "SELECT * from peticionmedio where estado='rechazado' order by id_peticion DESC LIMIT 0, 5;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+        function listarCorreoPeticionMedio() {
+        try {
+            $con = "SELECT `correo` from peticionmedio;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function listarCorreoMedio() {
+        try {
+            $con = "SELECT `correo` from medio;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function listarURLPeticionMedio() {
+        try {
+            $con = "SELECT `url` from peticionmedio;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function listarURLMedio() {
+        try {
+            $con = "SELECT `url` from medio;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
         }
@@ -342,7 +586,135 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
+     function eliminaEmpresa($usuario) {
+        try {
+            $con = "DELETE FROM `empresa` WHERE usuario=:usuario;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['usuario' => $usuario]);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+       function eliminaMedio($nombre) {
+        try {
+            $con = "DELETE FROM `medio` WHERE nombre=:nombre;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['nombre' => $nombre]);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function eliminaPeticionMedio($correo) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionmedio` SET estado='rechazado' where correo=:correo;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['correo' => $correo]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
 
+    function aceptaPeticionMedio($correo) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionmedio` SET estado='aceptado' where correo=:correo;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['correo' => $correo]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function aceptaPeticionProducto($id_peticion) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionproducto` SET estado='aceptado' where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+        function rechazaPeticionProducto($id_peticion) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionproducto` SET estado='rechazado' where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+          function rechazaPeticionEvento($id_peticion) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionevento` SET estado='rechazado' where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function aceptaPeticionEvento($id_peticion) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionevento` SET estado='aceptado' where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function proporcionaSegumientoPeticionProducto($id_peticion,$seguimiento) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionproducto` SET seguimiento=:seguimiento where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['seguimiento' => $seguimiento,'id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+         function proporcionaSegumientoPeticionEvento($id_peticion,$seguimiento) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionevento` SET seguimiento=:seguimiento where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['seguimiento' => $seguimiento,'id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+function proporcionaCoberturaPeticionProducto($id_peticion,$cobertura) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionproducto` SET cobertura=:cobertura where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['cobertura' => $cobertura,'id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function proporcionaCoberturaPeticionEvento($id_peticion,$cobertura) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `peticionevento` SET cobertura=:cobertura where id_peticion=:id_peticion;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['cobertura' => $cobertura,'id_peticion' => $id_peticion]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Elimina producto en función de id_producto
      * @return boolean

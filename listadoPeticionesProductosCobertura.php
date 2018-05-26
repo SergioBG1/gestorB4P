@@ -14,29 +14,16 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-       $peticion=0;
-    //guardamos los datos que vamos a usar en variables
-    $array = $bd->listarEventosMedio();
-    $empresas = [];
-    $num = 0;
-    foreach ($array as $valor) {
-        $e = $bd->consigueNombre($valor['id_empresa_e']);
-        $empresa[] = $e[0]['usuario'];
+    $numero=0;
+    //guardamos los datos que vamos a usar en variable
+    $id_empresa=$bd->consigueID($_SESSION['usuario']);
+    if(isset($_POST['proporcionar'])){
+        $bd->proporcionaCoberturaPeticionProducto($_POST['peticion'], $_POST['cobertura']);
     }
-       if (isset($_POST['solicitar'])) {
-      $bd->anadirPeticionEvento($_POST['medio'], $_POST['evento'], $_POST['empresa']);
-    }
-        $idMedio=$bd->consigueIDMedio($_SESSION['usuario']);
-     $conjuntoPeticiones = $bd->listarPeticionesEventoMedio($idMedio[0]['id_medio']);
+
     //Enviamos las variables al .tpl.php
-    $smarty->assign("array", $array);
-    $smarty->assign("empresa", $empresa);
-    $smarty->assign("num", $num);
-        $smarty->assign("idMedio", $idMedio);
-    $smarty->assign("conjuntoPeticiones", $conjuntoPeticiones);
-    $smarty->assign("peticion", $peticion);
-    $smarty->assign("nombre", $_SESSION['usuario']);
-    $smarty->display('listadoEventoMedio.tpl');
+     $smarty->assign("peticion", $_POST['peticion']);
+    $smarty->display('listadoPeticionesProductosCobertura.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
 '>Acceso irregular. Volviendo a Medio.</div></body>";
