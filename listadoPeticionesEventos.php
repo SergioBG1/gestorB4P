@@ -29,6 +29,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     }
 
     //Enviamos las variables al .tpl.php
+      $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign("array", $array);
       $smarty->assign("medios", $medios);
          $smarty->assign("numero", $numero);

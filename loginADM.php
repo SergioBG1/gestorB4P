@@ -26,20 +26,20 @@
             $user = $_POST['user'];
             $contrasena = md5($_POST['pass']);
             $bd = new BD();
-            $a = $bd->verificar($user, $contrasena);
+            $a = $bd->verificarADM($user, $contrasena);
             if ($a === true) {
                 $_SESSION['usuario'] = $user;
                 $_SESSION['pass'] = $contrasena;
-                $id = $bd->consigueID($_SESSION['usuario']);
+                $id = $bd->consigueID("sergio");
                 $_SESSION['id'] = $id[0]['id_empresa'];
-                header("Location:perfilEmpresa.php");
+                header("Location:perfilADM.php");
             } else {
                 $frase = "Usuario introducido incorrecto<br>";
                 $smarty->assign("frase", $frase);
             }
         }
 
-        $smarty->display('login2.tpl');
+        $smarty->display('loginADM.tpl');
         ?>
 
 

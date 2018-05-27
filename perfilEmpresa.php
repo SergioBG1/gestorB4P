@@ -14,7 +14,10 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd=new BD();
+    $rol=$bd->consigueRol($_SESSION['usuario']);
+    $_SESSION['rol']=$rol;
     $smarty->assign('usuario',$_SESSION['usuario']);
+    $smarty->assign('rol',$rol);
     $smarty->display('perfilEmpresa.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;

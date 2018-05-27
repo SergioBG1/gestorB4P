@@ -6,7 +6,7 @@ session_start();
 require_once("libs/SmartyBC.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null && isset($_POST['peticion'])) {
+if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new SmartyBC();
     $smarty->template_dir = 'templates';
@@ -29,6 +29,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null && i
       $smarty->assign("medios", $medios);
          $smarty->assign("numero", $numero);
           $smarty->assign("productos", $productos);
+            $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign("nombre", $_SESSION['usuario']);
     $smarty->display('listadoPeticionesEventos2.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio

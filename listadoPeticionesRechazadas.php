@@ -22,6 +22,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     }
     $array = $bd->listarPeticionMedioRechazadas();
     //Enviamos las variables al .tpl.php
+      $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign("array", $array);
     $smarty->assign("nombre", $_SESSION['usuario']);
     $smarty->display('listadoPeticionesRechazadas.tpl');

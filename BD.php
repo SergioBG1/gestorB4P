@@ -23,10 +23,10 @@ class BD {
     function verificar($usuario, $contra) {
         try {
             $prueba = 0;
-            $con = "SELECT * from empresa where usuario='$usuario' && pass='$contra'";
+            $con = "SELECT * from empresa where usuario=:user && pass=:contra && confirmado='si'";
             $this->__construct();
             $consulta = $this->conexion->prepare($con);
-            $consulta->execute();
+            $consulta->execute(['user' => $usuario,'contra' =>$contra ]);
             while ($consulta->fetch()) {
                 $prueba++;
             }
@@ -39,7 +39,25 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
-
+ function verificarADM($usuario, $contra) {
+        try {
+            $prueba = 0;
+            $con = "SELECT * from administrador where nombre=:user && pass=:contra";
+            $this->__construct();
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['user' => $usuario,'contra' =>$contra ]);
+            while ($consulta->fetch()) {
+                $prueba++;
+            }
+            if ($prueba > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Verifica usuario MEDIO
      * @param String $usuario
@@ -49,10 +67,10 @@ class BD {
     function verificarMedio($usuario, $contra) {
         try {
             $prueba = 0;
-            $con = "SELECT * from medio where nombre='$usuario' && pass='$contra'";
+            $con = "SELECT * from medio where nombre=:user && pass=:contra && baneado='no'";
             $this->__construct();
             $consulta = $this->conexion->prepare($con);
-            $consulta->execute();
+          $consulta->execute(['user' => $usuario,'contra' =>$contra ]);
             while ($consulta->fetch()) {
                 $prueba++;
             }
@@ -82,7 +100,17 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
-
+  function consigueRol($usuario) {
+        try {
+            $prueba = 0;
+            $con = "SELECT `rolVideojuegos` from empresa where usuario=:user";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['user' => $usuario]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Retorna nombre de usuario en función de id_empresa
      * @param int $id
@@ -130,6 +158,26 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
+     function consigueDatosMedioCorreo($usuario) {
+        try {
+            $con = "SELECT `correo` from medio where nombre=:usuario";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['usuario' => $usuario]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function consigueDatosEmpresaCorreo($usuario) {
+        try {
+            $con = "SELECT `correo` from empresa where usuario=:usuario";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['usuario' => $usuario]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
 function consigueDatosMedioID($id_medio) {
         try {
             $con = "SELECT `direccion`, `visitas`, `url`, `seguidores`, `correo`, `nombre` from medio where id_medio=:id_medio";
@@ -155,7 +203,16 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
-
+function listarEventosADM() {
+        try {
+            $con = "SELECT * from evento";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Retorna lista de productos en función de empresa
      * @param int $id
@@ -171,7 +228,16 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
-
+  function listarProductosADM() {
+        try {
+            $con = "SELECT * from producto";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Retorna lista de eventos
      * @return Array
@@ -249,6 +315,26 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
+       function peticionEmpresa($usuario, $correo, $pass, $direccion, $rolVideojuegos) {
+        try {
+            $con = "INSERT INTO `empresa`(`usuario`, `pass`, `direccion`,`correo`,`rolVideojuegos`)  VALUES (:usuario, :pass, :direccion, :correo, :rolVideojuegos);";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['usuario' => $usuario,'direccion' => $direccion, 'correo' => $correo, 'pass' => $pass, 'rolVideojuegos' => $rolVideojuegos]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+       function anadeADM($user, $correo, $pass) {
+        try {
+            $con = "INSERT INTO `administrador`(`nombre`, `correo`, `pass`)  VALUES (:nombre, :correo, :pass);";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['nombre' => $user, 'correo' => $correo, 'pass' => $pass]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
       function anadirMedio($user, $correo, $pass, $direccion, $visitas, $url, $seguidores) {
         try {
             $visitas= (int) $visitas;
@@ -264,6 +350,25 @@ function consigueDatosMedioID($id_medio) {
     function listarPeticionMedio() {
         try {
             $con = "SELECT * from peticionmedio where estado='pendiente';";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }  function listarPeticionEmpresa() {
+        try {
+            $con = "SELECT * from empresa where confirmado='no';";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function listarPeticionEmpresaRechazada() {
+        try {
+            $con = "SELECT * from empresa where confirmado='rechazado';";
             $consulta = $this->conexion->prepare($con);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -321,6 +426,17 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
+        function listarPeticionEmpresaAceptadas() {
+        try {
+            $con = "SELECT * from empresa where confirmado='si' order by id_empresa DESC LIMIT 0, 5;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    
       function listarPeticionMedioAceptadasProducto($id_medio_u) {
         try {
             $con = "SELECT * from peticionproducto where estado='aceptado' AND id_medio_u=:id_medio_u;";
@@ -431,6 +547,16 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
+      function listarTodosMedios() {
+        try {
+            $con = "SELECT * from medio;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
         function listarCorreoPeticionMedio() {
         try {
             $con = "SELECT `correo` from peticionmedio;";
@@ -441,9 +567,31 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
+    
+    
      function listarCorreoMedio() {
         try {
             $con = "SELECT `correo` from medio;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function listarCorreoEmpresa() {
+        try {
+            $con = "SELECT `correo` from empresa;";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+         function listarCorreoADM() {
+        try {
+            $con = "SELECT `correo` from administrador;";
             $consulta = $this->conexion->prepare($con);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -490,7 +638,28 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
-
+   function actualizaCantidadEmpresa($cantidad,$nombre) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `producto` SET `cantidad`=:cantidad where nombre=:nombre";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['cantidad' => $cantidad,'nombre' => $nombre]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    function actualizaPlazasEmpresa($plazas,$nombre) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `evento` SET `plazas`=:plazas where nombre=:nombre";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['plazas' => $plazas,'nombre' => $nombre]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
     /**
      * Actualiza Perfil Medio
      * @param String $correo
@@ -506,6 +675,17 @@ function consigueDatosMedioID($id_medio) {
             $con = "UPDATE `medio` SET `direccion`=:direccion,`correo`=:correo,`seguidores`=:seguidores,`url`=:url,`visitas`=:visitas  where nombre=:user;";
             $consulta = $this->conexion->prepare($con);
             $resultado = $consulta->execute(['user' => $user, 'direccion' => $direccion, 'correo' => $correo, 'visitas' => $visitas, 'url' => $url, 'seguidores' => $seguidores]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+        function banearMedio($user) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `medio` SET `baneado`='si' where nombre=:user;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['user' => $user]);
             return $resultado;
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();
@@ -615,11 +795,34 @@ function consigueDatosMedioID($id_medio) {
             echo "Error " . $e->getMessage();
         }
     }
+       function eliminaPeticionEmpresa($correo) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `empresa` SET confirmado='rechazado' where correo=:correo;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['correo' => $correo]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+    
 
     function aceptaPeticionMedio($correo) {
         try {
             //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
             $con = "UPDATE `peticionmedio` SET estado='aceptado' where correo=:correo;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['correo' => $correo]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+      function aceptaPeticionEmpresa($correo) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `empresa` SET confirmado='si' where correo=:correo;";
             $consulta = $this->conexion->prepare($con);
             $resultado = $consulta->execute(['correo' => $correo]);
             return $resultado;

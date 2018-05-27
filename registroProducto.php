@@ -15,6 +15,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->cache_dir = 'cache';
     $frases = '';
     $bd = new BD();
+    
 //Comprobamos que se ha pulsado añadir para recopilar información y crear Producto
     if (isset($_POST['anadir'])) {
         $producto = $_POST['product'];
@@ -27,6 +28,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
             $frases = "Error durante el añadido.";
         }
     }
+    $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign('frases', $frases);
     $smarty->display('registroProducto.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio

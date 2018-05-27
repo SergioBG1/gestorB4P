@@ -16,7 +16,8 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $bd = new BD();
     $id=$bd->consigueIDMedio($_SESSION['usuario']);
      $numero=0;
-     
+          $productos=array();
+
     //guardamos los datos que vamos a usar en variables
     $array = $bd->listarPeticionMedioAceptadasEvento($id[0]['id_medio']);
      foreach($array as $item){

@@ -48,22 +48,20 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
 $textoCorreo='';
 
     if (isset($_POST['aceptar'])) {
-      $usuarioNuevo = $bd->cogeDatosMedio( $_POST['correo']);
-      $bd->anadirMedio($usuarioNuevo[0]['nombre'], $_POST['correo'], md5($usuarioNuevo[0]['pass']), $usuarioNuevo[0]['direccion'], $usuarioNuevo[0]['visitas'], $usuarioNuevo[0]['url'], $usuarioNuevo[0]['seguidores']);
-     $textoCorreo= enviaCorreo($_POST['correo'],$usuarioNuevo[0]['nombre']);
-      $bd->aceptaPeticionMedio( $_POST['correo']);
+     $textoCorreo= enviaCorreo($_POST['correo'],$_POST['usuario']);
+      $bd->aceptaPeticionEmpresa( $_POST['correo']);
     }
     if (isset($_POST['eliminar'])) {
-      $bd->eliminaPeticionMedio( $_POST['correo']);
+      $bd->eliminaPeticionEmpresa( $_POST['correo']);
     }
         //guardamos los datos que vamos a usar en variables
-    $array = $bd->listarPeticionMedio();
+    $array = $bd->listarPeticionEmpresa();
     //Enviamos las variables al .tpl.php
-      $smarty->assign('rol',$_SESSION['rol']);
+ 
     $smarty->assign("array", $array);
     $smarty->assign("nombre", $_SESSION['usuario']);
     $smarty->assign("textoCorreo", $textoCorreo);
-    $smarty->display('listadoPeticiones.tpl');
+    $smarty->display('listadoPeticionesEmpresa.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
 '>Acceso irregular. Volviendo a Medio.</div></body>";

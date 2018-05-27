@@ -17,7 +17,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $numero=0;
     //guardamos los datos que vamos a usar en variable
     $id_empresa=$bd->consigueID($_SESSION['usuario']);
-            if (isset($_POST['rechazar'])) {
+     if (isset($_POST['rechazar'])) {
       $bd->rechazaPeticionProducto($_POST['peticion']);
     }
     $array = $bd->listarPeticionProducto($id_empresa[0]['id_empresa']);
@@ -30,6 +30,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     }
 
     //Enviamos las variables al .tpl.php
+      $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign("array", $array);
       $smarty->assign("medios", $medios);
          $smarty->assign("numero", $numero);

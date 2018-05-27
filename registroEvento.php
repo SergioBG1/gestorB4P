@@ -27,6 +27,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
             $frases = "Error durante el añadido.";
         }
     }
+      $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign('frases', $frases);
     $smarty->display('registroEvento.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio

@@ -1,5 +1,5 @@
 <?php
-function enviaCorreo($correo,$nombre){
+function enviaCorreo($correo,$nombre,$textoBody){
 require 'PHPMailerAutoload.php';
 if (empty($errors)) {
     $mail = new PHPMailer(true); //defaults to using php "mail()"; the true param means it will throw exceptions on errors, which we need to catch
@@ -12,16 +12,21 @@ try {                              // Enable verbose debug output
     $mail->Port = 25;                                  // TCP port to connect, tls=587, ssl=465
     $mail->From = 'gestordistribucionb4p@gmail.com';
     $mail->FromName = 'Gestor Distribución B4P';
-    $mail->addAddress($correo);     // Add a recipient                                // Set word wrap to 50 characters
+    $bd2 =new BD();
+    $array =  $bd2->listarCorreoADM();
+    foreach($array as $item){
+         $mail->addAddress($item['correo']); 
+    }
     $mail->isHTML(true);   
+    $mail->AddReplyTo($correo);
     $mail->CharSet = 'UTF-8';// Set email format to HTML
-    $mail->Subject ="Hola $nombre. Se ha confirmado su cuenta en Gestor B4P.";
-    $mail->Body    ='Han confirmado su cuenta en <b>Gestor B4P</b>. Dirijase a login para iniciar sesión con los datos que proporcionaste.';
+    $mail->Subject ="$nombre ha avisado de un problema";
+    $mail->Body    = $textoBody;
     if(!$mail->send()) {
         return 'Error al enviar mensaje de dado de alta. Revisa que el destinatario ha recibido el correo.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     } else {
-        return 'Se ha enviado un mensaje avisando del dado de alta.';
+        return 'Se ha enviado un mensaje avisando del problema.Serás respondido en la mayor brevedad posible.';
     }
     $errors[] = "Send mail sucsessfully";
 } catch (phpmailerException $e) {
@@ -37,7 +42,7 @@ session_start();
 require_once("libs/SmartyBC.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
+if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass'])) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new SmartyBC();
     $smarty->template_dir = 'templates';
@@ -45,29 +50,25 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-$textoCorreo='';
+    $numero=0;
+    $textoCorreo='';
+    //guardamos los datos que vamos a usar en variable
 
-    if (isset($_POST['aceptar'])) {
-      $usuarioNuevo = $bd->cogeDatosMedio( $_POST['correo']);
-      $bd->anadirMedio($usuarioNuevo[0]['nombre'], $_POST['correo'], md5($usuarioNuevo[0]['pass']), $usuarioNuevo[0]['direccion'], $usuarioNuevo[0]['visitas'], $usuarioNuevo[0]['url'], $usuarioNuevo[0]['seguidores']);
-     $textoCorreo= enviaCorreo($_POST['correo'],$usuarioNuevo[0]['nombre']);
-      $bd->aceptaPeticionMedio( $_POST['correo']);
-    }
-    if (isset($_POST['eliminar'])) {
-      $bd->eliminaPeticionMedio( $_POST['correo']);
-    }
-        //guardamos los datos que vamos a usar en variables
-    $array = $bd->listarPeticionMedio();
+
+    if(isset($_POST['proporcionar'])){
+   $correo=$bd->consigueDatosMedioCorreo($_SESSION['usuario']);
+    $textoCorreo= enviaCorreo($correo[0]['correo'],$_SESSION['usuario'],$_POST['proble']);
+        }
+    
+
     //Enviamos las variables al .tpl.php
-      $smarty->assign('rol',$_SESSION['rol']);
-    $smarty->assign("array", $array);
-    $smarty->assign("nombre", $_SESSION['usuario']);
-    $smarty->assign("textoCorreo", $textoCorreo);
-    $smarty->display('listadoPeticiones.tpl');
+
+     $smarty->assign("texto", $textoCorreo);
+    $smarty->display('avisarProblema.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
-'>Acceso irregular. Volviendo a Medio.</div></body>";
-    header("Refresh:3,url=perfilMedio.php");
+'>Acceso irregular. Volviendo al anterior apartado.</div></body>";
+    header("Refresh:3,url=listadoPeticionesProductos2.php");
 }
 ?>
 

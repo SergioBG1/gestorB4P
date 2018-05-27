@@ -1,5 +1,36 @@
 <?php
-
+function enviaCorreo($correo,$nombre,$producto){
+require 'PHPMailerAutoload.php';
+if (empty($errors)) {
+    $mail = new PHPMailer(true); //defaults to using php "mail()"; the true param means it will throw exceptions on errors, which we need to catch
+try {                              // Enable verbose debug output
+    $mail->isSMTP();                                    // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                             // Enable SMTP authentication
+    $mail->Username = 'gestordistribucionb4p@gmail.com';           // SMTP username
+    $mail->Password = 'gestorB11';                       // SMTP password                        // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 25;                                  // TCP port to connect, tls=587, ssl=465
+    $mail->From = 'gestordistribucionb4p@gmail.com';
+    $mail->FromName = 'Gestor Distribución B4P';
+    $mail->addAddress($correo);     // Add a recipient                                // Set word wrap to 50 characters
+    $mail->isHTML(true);   
+    $mail->CharSet = 'UTF-8';// Set email format to HTML
+    $mail->Subject ="Hola $nombre. Se ha confirmado su petición para el producto $producto.";
+    $mail->Body    ='Inicie sesión en <b>GESTOR B4P</b> para visualizar el seguimiento y proporcionar su cobertura.';
+    if(!$mail->send()) {
+        return 'Error al enviar mensaje de dado de alta. Revisa que el destinatario ha recibido el correo.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        return 'Se ha enviado un mensaje avisando del dado de alta.';
+    }
+    $errors[] = "Send mail sucsessfully";
+} catch (phpmailerException $e) {
+    $errors[] = $e->errorMessage(); //Pretty error messages from PHPMailer
+} catch (Exception $e) {
+    $errors[] = $e->getMessage(); //Boring error messages from anything else!
+}
+}
+}
 //Iniciamiamos sesion para usar variables de SESSION
 session_start();
 //Librerías requeridas una vez
@@ -20,7 +51,10 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null && i
     $id_empresa=$bd->consigueID($_SESSION['usuario']);
     $array = $bd->listarPeticionProducto($id_empresa[0]['id_empresa']);
        if (isset($_POST['aceptar'])) {
+            $textoCorreo= enviaCorreo($_POST['correo'],$_POST['nombre'],$_POST['producto']);
       $bd->aceptaPeticionProducto($_POST['peticion']);
+      $bd->actualizaCantidadEmpresa($_POST['cantidad']-1,$_POST['producto']);
+      
     }
     if(isset($_POST['proporcionar'])){
         $bd->proporcionaSegumientoPeticionProducto($_POST['peticion'], $_POST['seguimiento']);
@@ -31,6 +65,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null && i
 
     //Enviamos las variables al .tpl.php
     $smarty->assign("array", $array);
+      $smarty->assign('rol',$_SESSION['rol']);
             $smarty->assign("texto",$texto);
      $smarty->assign("peticion", $_POST['peticion']);
     $smarty->display('listadoPeticionesProductosRespuesta.tpl');

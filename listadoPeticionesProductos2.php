@@ -29,6 +29,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
       $smarty->assign("medios", $medios);
          $smarty->assign("numero", $numero);
           $smarty->assign("productos", $productos);
+            $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign("nombre", $_SESSION['usuario']);
     $smarty->display('listadoPeticionesProductos2.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio

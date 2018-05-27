@@ -37,6 +37,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null && (
     $smarty->assign('plataforma', $plataforma);
     $smarty->assign('cantidad', $cantidad);
     $smarty->assign('id', $id);
+       $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign('congelado', $congelado);
     $smarty->assign('frases', $frases);
 

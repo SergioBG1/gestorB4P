@@ -59,11 +59,11 @@ $textoCorreo='';
         //guardamos los datos que vamos a usar en variables
     $array = $bd->listarPeticionMedio();
     //Enviamos las variables al .tpl.php
-      $smarty->assign('rol',$_SESSION['rol']);
+ 
     $smarty->assign("array", $array);
     $smarty->assign("nombre", $_SESSION['usuario']);
     $smarty->assign("textoCorreo", $textoCorreo);
-    $smarty->display('listadoPeticiones.tpl');
+    $smarty->display('listadoPeticionesADM.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
 '>Acceso irregular. Volviendo a Medio.</div></body>";

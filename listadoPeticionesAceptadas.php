@@ -17,6 +17,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     //guardamos los datos que vamos a usar en variables
     $array = $bd->listarPeticionMedioAceptadas();
     //Enviamos las variables al .tpl.php
+      $smarty->assign('rol',$_SESSION['rol']);
     $smarty->assign("array", $array);
     $smarty->display('listadoPeticionesAceptadas.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
