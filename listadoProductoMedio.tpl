@@ -18,11 +18,12 @@ background-color:white;
 margin-top:20px;
 }
 body{
-    background-color: #C0C0C0;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
+                background-image: url("imagenes/readyplayer.jpg");
+                 background-size: 100% 100%;
 }
 input[type="submit"]:disabled {
     background: #ed8e8e;
@@ -44,13 +45,22 @@ input[type="submit"]:disabled {
 		</thead>
 		<tbody>
 {foreach $array as $item}
+    <input type='hidden' value='{$peticion=0}'>
+    {foreach  $conjuntoPeticiones as $peti}
+            {if $peti['id_producto_u'] === $item['id_producto']}  <input type='hidden' value='{$peticion++}'>{/if}
+            {/foreach}
 <tr>
     <td>{$item["nombre"]}</td>
     <td>{$item["plataforma"]}</td>
     <td>{$item["cantidad"]}</td>
     <td>{$empresa[{$num}]}</td>
-    <td><form method="POST" action="#"><input type="submit" name="solicitar" value="Solicitar"  {if $item['congelado'] == 'SI'}disabled{/if}>
-    </form></td>
+
+    <td><form method="POST" action="listadoProductoMedio.php"><input type="submit" name="solicitar" value="Solicitar"  {if $item['congelado'] == 'SI' || $peticion>0}disabled{/if}>
+        <input type='hidden' name='producto' value='{$item["id_producto"]}'>
+    <input type='hidden' name='empresa' value='{$item["id_empresa_p"]}'>
+    <input type='hidden' name='medio' value='{$idMedio[0]["id_medio"]}'>
+        </form>
+    </td>
 </tr>
  <input type='hidden' value='{$num++}'>
 {/foreach}

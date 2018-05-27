@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.css"/>
 
     <style>
-       
+               
    #contenedor{
 border:2px solid;
 border-radius:20px;
@@ -28,54 +28,42 @@ body{
 body.videojuegos{
 background-image: url("imagenes/fondoWeb.jpg");
 }
-    </style>
 
+    </style>
     <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>     <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form>  <div id="contenedor">
-            <h1>Listado de Productos de la empresa {$nombre}</h1><br>
-
-
-                <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
+        </form><div id="contenedor">
+        <h1>Listado de Peticiones Aceptadas en la plataforma</h1><br>
+        <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
 		<thead>
 			<tr style="height: 18px; border: 2px solid #000000; background-color: #e3e3e3; ">
-				<th style="text-align: left;">Nombre del Producto</th>
-				<th style="text-align: left;">Plataforma</th>
-				<th style="text-align: left;">Cantidad</th>
-				<th style="text-align: left;"></th>
-                                   <th style="text-align: left;"></th>
+				<th style="text-align: left;">Nombre del Medio</th>
+				<th style="text-align: left;">Dirección</th>
+				<th style="text-align: left;">Visitas</th>
+				<th style="text-align: left;">URL</th>
+                                <th style="text-align: left;">Seguidores</th>
+                                <th style="text-align: left;">Correo</th>
+                                
 			</tr>
 		</thead>
 		<tbody>
-			  {foreach $array as $item}
+			 {foreach $array as $item}
 <tr>
     <td>{$item["nombre"]}</td>
-    <td>{$item["plataforma"]}</td>
-    <td>{$item["cantidad"]}</td>
-    <td><form method="POST" action="editarProducto.php">
-            <input type="submit" name="editar" value="Editar">
-            <input type="hidden" name="nombre" value={$item["nombre"]}>
-            <input type="hidden" name="plataforma" value={$item["plataforma"]}>
-            <input type="hidden" name="cantidad" value={$item["cantidad"]}>
-            <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
-            <input type="hidden" id="congelado" name="congelado" value={$item["congelado"]}>
-        </form></td>
-    <td><form method="POST" action="listarProducto.php">
-            <input type="submit" name="eliminar" value="Eliminar">
-            <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
-        </form></td>
+    <td>{$item["direccion"]}</td>
+    <td>{$item["visitas"]}</td>
+    <td>{$item["url"]}</td>
+     <td>{$item["seguidores"]}</td>
+      <td>{$item["correo"]}</td>
 </tr>
-            {/foreach}
+{/foreach}
 			
 		</tbody>
 	</table>
-                 <form method="POST" action="registroProducto.php">
-            <input type="submit" class="btn btn-success" name="volver" value="Volver a Registro">         
+                 <form method="POST" action="perfilEmpresa.php">
+            <input type="submit"  class="btn btn-success" name="volver" value="Volver a Inicio">         
                  </form></div>
-          <!-- jQuery -->
-	<!-- El JavaScript de DataTables -->
- 
-	<script language="javascript">
+        <script language="javascript">
         //Usamos DataTable y lo traducimos a nuestro idioma
 		$('#tabla_de_miembros').DataTable( {
  
@@ -141,11 +129,8 @@ background-image: url("imagenes/fondoWeb.jpg");
                 
  
     } );**/
-        
          
 	</script>
   
-  
-    
     </body>
 </html>

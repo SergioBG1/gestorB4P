@@ -12,11 +12,12 @@ margin-left:10%;
 background-color:white;
 }
 body{
-    background-color: #C0C0C0;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
+                background-image: url("imagenes/readyplayer.jpg");
+                 background-size: 100% 100%;
 }
 div#myCarousel {
     width: 90%;
@@ -46,6 +47,8 @@ margin-top:10px;}
          <a href="editarPerfilMedio.php"><img src='https://png.icons8.com/metro/1600/edit-user-male.png' width='150px' heigth='150px'></a>
          <h2>EDITAR</h2>
          </div>
+               <a href="listadoPeticionesAceptadasProductos.php">Listado de Peticiones de productos aceptadas</a><br>
+               <a href="listadoPeticionesAceptadasEventos.php">Listado de Peticiones de eventos aceptadas</a><br>
      </div>
 <div class="container">
   <h2>Últimos productos añadidos</h2>  
@@ -93,6 +96,9 @@ margin-top:10px;}
     </a>
   </div>
 </div>
-
+ <form method="POST" action="login.php">
+             <input type="hidden" name="usuario" value="{$usuario}">
+    <input type="submit" class="btn btn-danger" name="bajar2" value="Dar de baja"> 
+        </form>
     </body>
 </html>

@@ -12,15 +12,19 @@ margin-left:10%;
 background-color:white;
 }
 body{
-    background-color: #C0C0C0;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
+        background-image: url("imagenes/5153.jpg");
+        background-size: 50% 50%;
+}
+body.videojuegos{
+background-image: url("imagenes/fondoWeb.jpg");
 }
 
     </style>
-    <body>
+    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>
 
         <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 

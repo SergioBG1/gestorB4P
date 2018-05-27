@@ -15,29 +15,28 @@ body{
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
-                background-image: url("imagenes/readyplayer.jpg");
-                 background-size: 100% 100%;
+        background-image: url("imagenes/5153.jpg");
+        background-size: 50% 50%;
+}
+body.videojuegos{
+background-image: url("imagenes/fondoWeb.jpg");
 }
 
     </style>
-    <body>
+    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>
 
         <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
         </form>
      <div id="contenedor">
-         <div id="encabezado"> <h1>Edición de perfil de {$nombre}</h1></div>
+         <div id="encabezado"> <h1>Perfil de {$nombre}</h1></div>
          <form method="POST" action="editarPerfilMedio.php">
              {$frase}<br>
-             Dirección:  <input type="text" name="direccion" value="{$direccion}"><br><br>
-            Correo:  <input type="text" name="mail" value="{$correo}"><br><br>
-            Visitas:  <input type="text" name="visitas" value="{$visitas}"><br><br>
-            Url:  <input type="text" name="url" value="{$url}"><br><br>
-            Seguidores:  <input type="text" name="seguidores" value="{$seguidores}"><br><br>
-            <input type="submit" class="btn btn-success" name="cambiar" value="Guardar Cambios">         
-        </form>
-             <form method="POST" action="perfilMedio.php">
-            <input type="submit" class="btn btn-success" name="volver" value="Volver a Medio">         
+             Dirección:  {$direccion}<br><br>
+            Correo: {$correo}<br><br>
+            Visitas:{$visitas}<br><br>
+            Url:  {$url}<br><br>
+            Seguidores:  {$seguidores}<br><br>     
         </form>
      </div>
     </body>

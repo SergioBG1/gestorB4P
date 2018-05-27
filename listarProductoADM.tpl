@@ -52,7 +52,7 @@ background-image: url("imagenes/fondoWeb.jpg");
     <td>{$item["nombre"]}</td>
     <td>{$item["plataforma"]}</td>
     <td>{$item["cantidad"]}</td>
-    <td><form method="POST" action="editarProducto.php">
+    <td><form method="POST" action="editarProductoADM.php">
             <input type="submit" name="editar" value="Editar">
             <input type="hidden" name="nombre" value={$item["nombre"]}>
             <input type="hidden" name="plataforma" value={$item["plataforma"]}>
@@ -60,7 +60,7 @@ background-image: url("imagenes/fondoWeb.jpg");
             <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
             <input type="hidden" id="congelado" name="congelado" value={$item["congelado"]}>
         </form></td>
-    <td><form method="POST" action="listarProducto.php">
+    <td><form method="POST" action="listarProductoADM.php">
             <input type="submit" name="eliminar" value="Eliminar">
             <input type="hidden" id="valor" name="valor" value={$item["id_producto"]}>
         </form></td>

@@ -17,11 +17,12 @@ background-color:white;
 margin-top:20px;
 }
 body{
-    background-color: #C0C0C0;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
+                background-image: url("imagenes/readyplayer.jpg");
+                 background-size: 100% 100%;
 }
 input[type="submit"]:disabled {
     background: #ed8e8e;
@@ -44,13 +45,20 @@ input[type="submit"]:disabled {
 		</thead>
 		<tbody>
 			{foreach $array as $item}
+                               <input type='hidden' value='{$peticion=0}'>
+    {foreach  $conjuntoPeticiones as $peti}
+            {if $peti['id_evento_u'] === $item['id_evento']}  <input type='hidden' value='{$peticion++}'>{/if}
+            {/foreach}
 <tr>
     <td>{$item["nombre"]}</td>
     <td>{$item["ciudad"]}</td>
     <td>{$item["plazas"]}</td>
     <td>{$empresa[{$num}]}</td>
-     <td><form method="POST" action="#">
-            <input type="submit" name="solicitar" value="Solicitar" {if $item['congelado'] == 'SI'}disabled{/if}>
+     <td><form method="POST" action="listadoEventoMedio.php">
+            <input type="submit" name="solicitar" value="Solicitar" {if $item['congelado'] == 'SI' || $peticion>0}disabled{/if}>
+                    <input type='hidden' name='evento' value='{$item["id_evento"]}'>
+    <input type='hidden' name='empresa' value='{$item["id_empresa_e"]}'>
+    <input type='hidden' name='medio' value='{$idMedio[0]["id_medio"]}'>
         </form></td>
 </tr>
  <input type='hidden' value='{$num++}'>

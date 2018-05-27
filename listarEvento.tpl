@@ -18,15 +18,19 @@ background-color:white;
 margin-top:20px;
 }
 body{
-    background-color: #C0C0C0;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
+        background-image: url("imagenes/5153.jpg");
+        background-size: 50% 50%;
+}
+body.videojuegos{
+background-image: url("imagenes/fondoWeb.jpg");
 }
 
     </style>
-    <body>      <form method="POST" action="login.php">
+    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>     <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
         </form><div id="contenedor">
         <h1>Listado de Eventos de la empresa {$nombre}</h1>       <br>

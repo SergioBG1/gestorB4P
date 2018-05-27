@@ -16,29 +16,26 @@ body{
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
-        background-image: url("imagenes/5153.jpg");
+        background-image: url("imagenes/fondoWeb.jpg");
         background-size: 50% 50%;
-}
-body.videojuegos{
-background-image: url("imagenes/fondoWeb.jpg");
 }
 #prueba{
 display:inline-block;
 margin-right:20px;
 margin-top:10px;}
     </style>
-    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>
+    <body>
 
         <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
         </form>
  <div id="medio">
          <div id="prueba">
-         <a href="registroProducto.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
-         <h2>{if {$rol[0]['rolVideojuegos']}=='si'}JUEGOS{else}PRODUCTOS{/if}</h2>
+         <a href="listarProductoADM.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
+         <h2>PRODUCTOS</h2>
          </div>
          <div id="prueba">
-         <a href="registroEvento.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
+         <a href="listarEventoADM.php"><img src='imagenes/1234.jpg' width='150px' heigth='150px'></a>
          <h2>EVENTOS</h2>
          </div>
          <div id="prueba">
@@ -47,13 +44,8 @@ margin-top:10px;}
          </div>
  </div><br>
         <div id="medio">
-            <a href="listadoPeticiones.php">Listado de Peticiones de medios pendientes</a><br>
-            <a href="listadoPeticionesAceptadas.php">Listado de Peticiones de medios aceptadas</a><br>
-            <a href="listadoPeticionesRechazadas.php">Listado de Peticiones de medios rechazadas</a><br>
-            <a href="listadoPeticionesProductos.php">Listado de Peticiones de Productos</a><br>
-            <a href="listadoPeticionesProductos2.php">Listado de Peticiones de Productos Aceptadas</a><br>
-             <a href="listadoPeticionesEventos.php">Listado de Peticiones de Eventos</a><br>
-               <a href="listadoPeticionesEventos2.php">Listado de Peticiones de Eventos Aceptadas</a><br>
+            <a href="anadirADM.php">Añadir ADM</a><br>
+             <a href="listadoMediosADM.php">Gestionar Medios</a><br>
          <form method="POST" action="login.php">
              <input type="hidden" name="usuario" value="{$usuario}">
     <input type="submit" class="btn btn-danger" name="bajar" value="Dar de baja"> 

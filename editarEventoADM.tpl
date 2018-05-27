@@ -24,7 +24,7 @@ background-image: url("imagenes/fondoWeb.jpg");
 form#linea{
 display:inline-block;}
     </style>
-      <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>   
+      <body>   
 
         <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
@@ -32,7 +32,7 @@ display:inline-block;}
      <div id="contenedor">
          <div id="encabezado"><h2>Editar Evento:</h2></div>
                    {$frases}<br>
-         <form method="POST" action="editarEvento.php">
+         <form method="POST" action="editarEventoADM.php">
              Nombre del evento:  <input type="text" name="nombre" value="{$evento}"><br><br>
             Ciudad:  <input type="text" name="ciudad" value="{$ciudad}"><br><br>
             Plazas:  <input type="text" name="plazas" value="{$plazas}"><br><br>
@@ -43,7 +43,7 @@ display:inline-block;}
                 <input type="hidden" id="valor" name="valor" value="{$id}"}>
             <input type="submit" class="btn btn-success" name="cambiar" value="Cambiar Evento">         
         </form>
-         <form method="POST"  action="listarEvento.php">
+         <form method="POST"  action="listarEventoADM.php">
             <input type="submit" class="btn btn-success" name="volver" value="Volver a listar">         
         </form>
      </div>

@@ -15,23 +15,21 @@ body{
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
-        background-image: url("imagenes/5153.jpg");
+        background-image: url("imagenes/fondoWeb.jpg");
         background-size: 50% 50%;
 }
-body.videojuegos{
-background-image: url("imagenes/fondoWeb.jpg");
-}
+
 form#linea{
 display:inline-block;}
     </style>
-    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>   
+    <body>   
         <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
         </form>
      <div id="contenedor">
          <div id="encabezado"><h2>Cambiar Producto:</h2></div>
           {$frases}<br>
-         <form method="POST" action="editarProducto.php">
+         <form method="POST" action="editarProductoADM.php">
              Nombre del producto:  <input type="text" name="nombre" value="{$nombre}"><br><br>
             Cantidad:  <input type="text" name="cantidad" value="{$cantidad}"><br><br>
             Plataforma:  <select name="plataforma">    
@@ -46,7 +44,7 @@ display:inline-block;}
     <input type="hidden" id="valor" name="valor" value="{$id}"}>
             <input type="submit" class="btn btn-success" name="cambiar" value="Cambiar Producto">         
         </form>
-    <form method="POST" action="listarProducto.php">
+    <form method="POST" action="listarProductoADM.php">
             <input type="submit" class="btn btn-success" name="volver" value="Volver a Listado">         
                  </form>
      </div>
