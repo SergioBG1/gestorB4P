@@ -6,7 +6,7 @@ session_start();
 require_once("libs/SmartyBC.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
+if (isset($_SESSION['medio']) != null && isset($_SESSION['pass']) != null) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new SmartyBC();
     $smarty->template_dir = 'templates';
@@ -14,7 +14,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-    $id=$bd->consigueIDMedio($_SESSION['usuario']);
+    $id=$bd->consigueIDMedio($_SESSION['medio']);
      $numero=0;
      $productos=array();
     //guardamos los datos que vamos a usar en variables

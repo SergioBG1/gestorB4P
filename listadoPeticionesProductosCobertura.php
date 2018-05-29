@@ -6,7 +6,7 @@ session_start();
 require_once("libs/SmartyBC.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
+if (isset($_SESSION['medio']) != null && isset($_SESSION['pass']) != null) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new SmartyBC();
     $smarty->template_dir = 'templates';
@@ -16,7 +16,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $bd = new BD();
     $numero=0;
     //guardamos los datos que vamos a usar en variable
-    $id_empresa=$bd->consigueID($_SESSION['usuario']);
+    $id_empresa=$bd->consigueID($_SESSION['medio']);
     if(isset($_POST['proporcionar'])){
         $bd->proporcionaCoberturaPeticionProducto($_POST['peticion'], $_POST['cobertura']);
     }

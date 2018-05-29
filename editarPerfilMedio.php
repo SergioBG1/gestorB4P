@@ -6,7 +6,7 @@ session_start();
 require_once("libs/Smarty.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
+if (isset($_SESSION['medio']) != null && isset($_SESSION['pass']) != null) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new Smarty;
     $smarty->template_dir = 'templates';
@@ -14,9 +14,9 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-    $smarty->assign("nombre", $_SESSION['usuario']);
+    $smarty->assign("nombre", $_SESSION['medio']);
     //guardamos los datos que vamos a usar en variables
-    $datos = $bd->consigueDatosMedio($_SESSION['usuario']);
+    $datos = $bd->consigueDatosMedio($_SESSION['medio']);
     $correo = $datos[0]['correo'];
     $seguidores = $datos[0]['seguidores'];
     $direccion = $datos[0]['direccion'];
@@ -35,7 +35,7 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
         $url = $urlNueva;
         $visitasNuevas = $_POST['visitas'];
         $visitas = $visitasNuevas;
-        $bd2 = $bd->actualizaPerfilMedio($correoNuevo, $direccionNueva, $visitas, $url, $seguidores, $_SESSION['usuario']);
+        $bd2 = $bd->actualizaPerfilMedio($correoNuevo, $direccionNueva, $visitas, $url, $seguidores, $_SESSION['medio']);
         if ($bd2 != null) {
             $frase = "Se han realizado los cambios correctamente.";
         } else {
@@ -52,8 +52,8 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     $smarty->display('editarPerfilMedio.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
-'>No puedes acceder sin loguear. ERROR</div></body>";
-    header("Refresh:3,url=login.php");
+'>Algo ha ocurrido mal. Volviendo a perfil de Medio</div></body>";
+    header("Refresh:3,url=perfilMedio.php");
 }
 ?>
 

@@ -37,7 +37,7 @@ session_start();
 require_once("libs/SmartyBC.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
+if (isset($_SESSION['adm']) != null && isset($_SESSION['pass']) != null) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new SmartyBC();
     $smarty->template_dir = 'templates';
@@ -54,15 +54,15 @@ $textoCorreo='';
     $array = $bd->listarTodosMedios();
     //Enviamos las variables al .tpl.php
     $smarty->assign("array", $array);
-    $smarty->assign("nombre", $_SESSION['usuario']);
+    $smarty->assign("nombre", $_SESSION['adm']);
     $smarty->assign("textoCorreo", $textoCorreo);
 
     $smarty->assign('texto',$textoCorreo);
     $smarty->display('listadoMediosADM.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
-'>Acceso irregular. Volviendo a Medio.</div></body>";
-    header("Refresh:3,url=perfilMedio.php");
+'>Acceso irregular. Volviendo a perfil ADM.</div></body>";
+    header("Refresh:3,url=perfilADM.php");
 }
 ?>
 

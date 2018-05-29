@@ -14,20 +14,31 @@ if (isset($_SESSION['adm']) != null && isset($_SESSION['pass']) != null) {
     $smarty->config_dir = 'configs';
     $smarty->cache_dir = 'cache';
     $bd = new BD();
-    //guardamos los datos que vamos a usar en variables
-    $array = $bd->listarEventosADM();
-    //Enviamos las variables al .tpl.php
-    $smarty->assign("array", $array);
     $smarty->assign("nombre", $_SESSION['adm']);
-    //Si pulsa eliminar, ejecutamos función para borrar
-    if (isset($_POST['eliminar'])) {
-        $bd->eliminaEvento($_POST['valor']);
-        header("Location:listarEventoADM.php");
+    //guardamos los datos que vamos a usar en variables
+    $correo = $datos[0]['correo'];
+    $frase = '';
+    //Comprobamos que se haya pulsado cambiar
+    if (isset($_POST['cambiar'])) {
+        $correoNuevo = $_POST['mail'];
+        $correo = $correoNuevo;
+        $nombreNuevo = $_POST['nombre'];
+        $bd2 = $bd->actualizaperfilADM($correo,$_SESSION['adm'],$nombreNuevo);
+        if ($bd2 != null) {
+            $frase = "Se han realizado los cambios correctamente.";
+            $_SESSION['adm'] = $nombreNuevo;
+        } else {
+            $frase = "Error durante los cambios.";
+        }
     }
-    $smarty->display('listarEventoADM.tpl');
+    //Enviamos las variables al .tpl.php
+    $smarty->assign("frase", $frase);
+    $smarty->assign("correo", $correo);
+    $smarty->assign("nombre", $_SESSION['adm']);
+    $smarty->display('editarPerfilADM.tpl');
 } else {//en caso de no contar con usuario devolvemos a inicio
     echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
-'>Acceso irregular. Volviendo a Perfil ADM.</div></body>";
+'>Algo ha ocurrido mal. Volviendo a perfil de ADM</div></body>";
     header("Refresh:3,url=perfilADM.php");
 }
 ?>

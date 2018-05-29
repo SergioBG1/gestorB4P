@@ -28,7 +28,7 @@
             $bd = new BD();
             $a = $bd->verificarADM($user, $contrasena);
             if ($a === true) {
-                $_SESSION['usuario'] = $user;
+                $_SESSION['adm'] = $user;
                 $_SESSION['pass'] = $contrasena;
                 $id = $bd->consigueID("sergio");
                 $_SESSION['id'] = $id[0]['id_empresa'];

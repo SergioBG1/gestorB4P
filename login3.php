@@ -26,7 +26,7 @@
             $bd = new BD();
             $a = $bd->verificarMedio($user, $contrasena);
             if ($a === true) {
-                $_SESSION['usuario'] = $user;
+                $_SESSION['medio'] = $user;
                 $_SESSION['pass'] = $contrasena;
                 header("Location:perfilMedio.php");
             } else {

@@ -158,6 +158,16 @@ class BD {
             echo "Error " . $e->getMessage();
         }
     }
+       function consigueDatosADM($usuario) {
+        try {
+            $con = "SELECT `correo` from administrador where nombre=:user";
+            $consulta = $this->conexion->prepare($con);
+            $consulta->execute(['user' => $usuario]);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
      function consigueDatosMedioCorreo($usuario) {
         try {
             $con = "SELECT `correo` from medio where nombre=:usuario";
@@ -675,6 +685,17 @@ function listarEventosADM() {
             $con = "UPDATE `medio` SET `direccion`=:direccion,`correo`=:correo,`seguidores`=:seguidores,`url`=:url,`visitas`=:visitas  where nombre=:user;";
             $consulta = $this->conexion->prepare($con);
             $resultado = $consulta->execute(['user' => $user, 'direccion' => $direccion, 'correo' => $correo, 'visitas' => $visitas, 'url' => $url, 'seguidores' => $seguidores]);
+            return $resultado;
+        } catch (PDOException $e) {
+            echo "Error " . $e->getMessage();
+        }
+    }
+     function actualizaPerfilADM($correo, $user, $nombreNuevo) {
+        try {
+            //UPDATE `empresa` SET `id_empresa`=[value-1],`usuario`=[value-2],`pass`=[value-3],`direccion`=[value-4],`correo`=[value-5] where usuario=:user
+            $con = "UPDATE `administrador` SET `nombre`=:nombreNuevo,`correo`=:correo where nombre=:user;";
+            $consulta = $this->conexion->prepare($con);
+            $resultado = $consulta->execute(['user' => $user, 'correo' => $correo,'nombreNuevo' => $nombreNuevo]);
             return $resultado;
         } catch (PDOException $e) {
             echo "Error " . $e->getMessage();

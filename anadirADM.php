@@ -6,12 +6,13 @@
     </head>
     <body>
         <?php
+      session_start();
         //Librerías requeridas una vez
         require_once("libs/Smarty.class.php");
         require_once ('BD.php');
+        if (isset($_SESSION['adm']) != null && isset($_SESSION['pass']) != null) {
 //Iniciamos sesion para usar variables de SESSION y eliminamos los restos que pueda haber
-        session_start();
-        session_unset();
+  
 //Configuramos SMARTY
         $smarty = new Smarty;
         $smarty->template_dir = 'templates';
@@ -47,7 +48,11 @@
             }
         }
         $smarty->assign("frase", $frase);
-        $smarty->display('anadirADM.tpl');
+        $smarty->display('anadirADM.tpl');} else {//en caso de no contar con usuario devolvemos a inicio
+    echo "<body style='background-color: #C0C0C0;color: #000;font-family: Varela Round, Arial, Helvetica, sans-serif;font-size: 16px;line-height: 1.5em;'><div style='border:2px solid;border-radius:20px;width:70%;text-align:center;margin-left:10%;background-color:white;
+'>Acceso irregular. Volviendo a perfil ADM.</div></body>";
+    header("Refresh:3,url=perfilADM.php");
+}
         ?>
 
 

@@ -6,7 +6,7 @@ session_start();
 require_once("libs/SmartyBC.class.php");
 require_once ('BD.php');
 //Comprobamos que no intentan entrar sin contar con usuario y contraseña
-if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
+if (isset($_SESSION['medio']) != null && isset($_SESSION['pass']) != null) {
     //Creamos y asignamos todo lo necesario para usar SMARTY
     $smarty = new SmartyBC();
     $smarty->template_dir = 'templates';
@@ -26,13 +26,13 @@ if (isset($_SESSION['usuario']) != null && isset($_SESSION['pass']) != null) {
     if (isset($_POST['solicitar'])) {
       $bd->anadirPeticionProducto($_POST['medio'], $_POST['producto'], $_POST['empresa']);
     }
-     $idMedio=$bd->consigueIDMedio($_SESSION['usuario']);
+     $idMedio=$bd->consigueIDMedio($_SESSION['medio']);
      $conjuntoPeticiones = $bd->listarPeticionesProductoMedio($idMedio[0]['id_medio']);
     //Enviamos las variables al .tpl.php
     $smarty->assign("array", $array);
     $smarty->assign("empresa", $empresa);
     $smarty->assign("num", $num);
-    $smarty->assign("nombre", $_SESSION['usuario']);
+    $smarty->assign("nombre", $_SESSION['medio']);
     $smarty->assign("idMedio", $idMedio);
     $smarty->assign("conjuntoPeticiones", $conjuntoPeticiones);
     $smarty->assign("peticion", $peticion);
