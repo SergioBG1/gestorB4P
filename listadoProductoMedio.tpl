@@ -29,9 +29,18 @@ input[type="submit"]:disabled {
     background: #ed8e8e;
 }
     </style>
-    <body>      <form method="POST" action="login.php">
+    <body>      <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header" style="color:white";>
+      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form><div id="contenedor">
+              </form></div></li>
+    </ul>
+  </div>
+</nav><div id="contenedor">
         <h1>Productos disponibles para el medio {$nombre}</h1>
   <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
 		<thead>
@@ -40,6 +49,7 @@ input[type="submit"]:disabled {
 				<th style="text-align: left;">Plataformas</th>
 				<th style="text-align: left;">Cantidad</th>
 				<th style="text-align: left;">Empresa</th>
+                                <th style="text-align: left;"></th>
                                 <th style="text-align: left;"></th>
 			</tr>
 		</thead>
@@ -55,12 +65,16 @@ input[type="submit"]:disabled {
     <td>{$item["cantidad"]}</td>
     <td>{$empresa[{$num}]}</td>
 
-    <td><form method="POST" action="listadoProductoMedio.php"><input type="submit" name="solicitar" value="Solicitar"  {if $item['congelado'] == 'SI' || $peticion>0}disabled{/if}>
+    <td><form method="POST" action="listadoProductoMedio.php"><input type="submit" name="solicitar" value="Solicitar"  {if $item['congelado'] == 'SI' || $peticion>0 || $item['cantidad']<1}disabled{/if}>
         <input type='hidden' name='producto' value='{$item["id_producto"]}'>
     <input type='hidden' name='empresa' value='{$item["id_empresa_p"]}'>
     <input type='hidden' name='medio' value='{$idMedio[0]["id_medio"]}'>
         </form>
     </td>
+     <td><form method="POST" action="perfilDatosEmpresaPeticion.php" target="_blank">       
+                  <input type="hidden" name="nombre" value="{$empresa[{$num}]}">
+            <input type="submit" name="consultar" value="Consultar datos empresa">
+        </form></td>
 </tr>
  <input type='hidden' value='{$num++}'>
 {/foreach}

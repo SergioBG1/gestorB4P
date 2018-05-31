@@ -21,19 +21,32 @@ body{
 
     </style>
     <body>
-
-        <form method="POST" action="login.php">
+     <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header" style="color:white";>
+      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form>
+              </form></div></li>
+    </ul>
+  </div>
+</nav>
      <div id="contenedor">
          <div id="encabezado"> <h1>Edición de perfil de {$nombre}</h1></div>
          <form method="POST" action="editarPerfilMedio.php">
              {$frase}<br>
-             Dirección:  <input type="text" name="direccion" value="{$direccion}"><br><br>
-            Correo:  <input type="text" name="mail" value="{$correo}"><br><br>
-            Visitas:  <input type="text" name="visitas" value="{$visitas}"><br><br>
-            Url:  <input type="text" name="url" value="{$url}"><br><br>
-            Seguidores:  <input type="text" name="seguidores" value="{$seguidores}"><br><br>
+             Dirección:  <input type="text" name="direccion" value="{$direccion}" required><br><br>
+               {literal}  
+            Correo: <input type="email" id="correo"  pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"              {/literal} name="mail"  value="{$correo}" placeholder="Correo" required="required"><br><br>
+                {literal} 
+           Visitas: <input type="text" id="visitas" pattern="[0-9]{0,9}" name="visitas"              {/literal} placeholder="Visitas" value="{$visitas}" required><br><br>
+  {literal} 
+         Url:   <input type="text" id="url" name="url" pattern="^http://www.[a-z]+[0-9]*[a-z]*(.com|.es)$"   {/literal} value="{$url}" placeholder="URL en http sin /" required><br><br>
+            {literal} 
+          Seguidores:  <input type="text" id="seguidores"  pattern="[0-9]{0,9}"       {/literal} name="seguidores"   value="{$seguidores}" placeholder="Seguidores" required><br><br>
+      
             <input type="submit" class="btn btn-success" name="cambiar" value="Guardar Cambios">         
         </form>
              <form method="POST" action="perfilMedio.php">

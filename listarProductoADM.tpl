@@ -69,8 +69,8 @@ background-image: url("imagenes/fondoWeb.jpg");
 			
 		</tbody>
 	</table>
-                 <form method="POST" action="registroProducto.php">
-            <input type="submit" class="btn btn-success" name="volver" value="Volver a Registro">         
+                 <form method="POST" action="perfilADM.php">
+            <input type="submit" class="btn btn-success" name="volver" value="Volver a Perfil ADM">         
                  </form></div>
           <!-- jQuery -->
 	<!-- El JavaScript de DataTables -->

@@ -147,16 +147,25 @@ height: 30px;
                   <form method="POST" action="registroMedio.php">
             <fieldset>
             {$frase}
-            <input type="text" id="usuario" name="user" placeholder="Usuario" required><br><br>
-            <input type="text" id="correo" name="correo" placeholder="Correo" required><br><br>
-            <input type="password" id="pass" name="pass" placeholder="Contraseña"><br><br>
-            <input type="text" id="direccion" name="direccion" placeholder="Dirección"><br><br>
-            <input type="text" id="visitas" name="visitas" placeholder="Visitas"><br><br>
-            <input type="text" id="url" name="url" placeholder="URL" required><br><br>
-            <input type="text" id="seguidores" name="seguidores" placeholder="Seguidores"><br><br>
+                 {literal} 
+            <input type="text" id="usuario" name="user" pattern="[A-Z]*[a-z]+[0-9]{0,9}"   placeholder="Usuario" required><br><br>
+                 {/literal} 
+            {literal} 
+            <input type="email" id="correo"  pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" name="correo"  placeholder="Correo" required="required"><br><br>
+             {/literal} 
+            <input type="password" id="pass" name="pass" placeholder="Contraseña" required><br><br>
+            <input type="text" id="direccion" name="direccion" placeholder="Dirección" required><br><br>
+            {literal} 
+            <input type="text" id="visitas" pattern="[0-9]{0,9}" name="visitas"  placeholder="Visitas" required><br><br>
+            {/literal}
+            {literal} 
+            <input type="text" id="url" name="url" pattern="^http://www.[a-z]+[0-9]*[a-z]*(.com|.es)$"  placeholder="URL en http sin /" required><br><br>
+               {/literal}{literal} 
+            <input type="text" id="seguidores"  pattern="[0-9]{0,9}" name="seguidores"  placeholder="Seguidores" required><br><br>
+            {/literal} 
             <input type="submit" name="enviar" value="Pedir registro">         
             </fieldset>
-           
+      
         </form> </div>
     </body>
 </html>

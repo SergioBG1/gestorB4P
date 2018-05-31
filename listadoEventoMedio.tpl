@@ -28,9 +28,18 @@ input[type="submit"]:disabled {
     background: #ed8e8e;
 }
     </style>
-    <body>      <form method="POST" action="login.php">
+    <body>          <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header" style="color:white";>
+      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form><div id="contenedor">
+              </form></div></li>
+    </ul>
+  </div>
+</nav><div id="contenedor">
         <h1>Prodcutos disponibles para el medio {$nombre}</h1>
 
 <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
@@ -40,6 +49,7 @@ input[type="submit"]:disabled {
 				<th style="text-align: left;">Ciudad</th>
 				<th style="text-align: left;">Plazas</th>
 				<th style="text-align: left;">Empresa</th>
+                                <th style="text-align: left;"></th>
                                 <th style="text-align: left;"></th>
 			</tr>
 		</thead>
@@ -55,10 +65,14 @@ input[type="submit"]:disabled {
     <td>{$item["plazas"]}</td>
     <td>{$empresa[{$num}]}</td>
      <td><form method="POST" action="listadoEventoMedio.php">
-            <input type="submit" name="solicitar" value="Solicitar" {if $item['congelado'] == 'SI' || $peticion>0}disabled{/if}>
+            <input type="submit" name="solicitar" value="Solicitar" {if $item['congelado'] == 'SI' || $peticion>0 || $item['plazas']<1}disabled{/if}>
                     <input type='hidden' name='evento' value='{$item["id_evento"]}'>
     <input type='hidden' name='empresa' value='{$item["id_empresa_e"]}'>
     <input type='hidden' name='medio' value='{$idMedio[0]["id_medio"]}'>
+        </form></td>
+         <td><form method="POST" action="perfilDatosEmpresaPeticion.php" target="_blank">       
+                  <input type="hidden" name="nombre" value="{$empresa[{$num}]}">
+            <input type="submit" name="consultar" value="Consultar datos empresa">
         </form></td>
 </tr>
  <input type='hidden' value='{$num++}'>

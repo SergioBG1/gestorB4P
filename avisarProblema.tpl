@@ -22,21 +22,26 @@ body{
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
-                background-image: url("imagenes/readyplayer.jpg");
-                 background-size: 100% 100%;
+        background-image: url("imagenes/5153.jpg");
+        background-size: 50% 50%;
+}
+body.videojuegos{
+background-image: url("imagenes/fondoWeb.jpg");
+}
+input.tam{
+width:80%;
+height:40%;
 }
 
     </style>
-    <body>      <form method="POST" action="login.php">
+    <body>     <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
         </form><div id="contenedor">
-        <h1>Proporcionar artículo cubriendo videojuego</h1><br>
-                {{$texto}}
-
-         <form method="POST" action="listadoPeticionesProductosCobertura.php">
-                 Cobertura   <input type="text" name="cobertura">   
-                 <input type="hidden" name="peticion" value={$peticion}>
-            <input type="submit" name="proporcionar" value="Proporcionar">
+        <h1>Avisar de un problema</h1><br>
+          {$texto}
+         <form method="POST" action="avisarProblema.php">
+             <input class="tam" type="text" name="proble" height="40%">   <br><br>
+            <input type="submit" name="proporcionar" value="Avisar">
         </form>
   
     </body>

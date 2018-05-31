@@ -39,17 +39,44 @@ margin-top:10px;}
          <h2>EVENTOS</h2>
          </div>
          <div id="prueba">
-         <a href="editarPerfil.php"><img src='https://png.icons8.com/metro/1600/edit-user-male.png' width='150px' heigth='150px'></a>
+         <a href="editarPerfilADM.php"><img src='https://png.icons8.com/metro/1600/edit-user-male.png' width='150px' heigth='150px'></a>
          <h2>EDITAR</h2>
          </div>
  </div><br>
         <div id="medio">
-            <a href="anadirADM.php">Añadir ADM</a><br>
-             <a href="listadoMediosADM.php">Gestionar Medios</a><br>
-         <form method="POST" action="login.php">
-             <input type="hidden" name="usuario" value="{$usuario}">
-    <input type="submit" class="btn btn-danger" name="bajar" value="Dar de baja"> 
-        </form>
-        </div>
+                      <div id="prueba">
+         <a href="listadoPeticionesADM.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedio.png' width='100px' heigth='100px'></a>
+         <h3>PETICIONES MEDIOS</h3>
+         </div>
+                  <div id="prueba">
+         <a href="listadoPeticionesAceptadasADM.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedioOK.png' width='100px' heigth='100px'></a>
+         <h3>MEDIOS ACEPTADOS</h3>
+         </div>
+                  <div id="prueba">
+         <a href="listadoPeticionesRechazadasADM.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedioNo.png' width='100px' heigth='100px'></a>
+         <h3>MEDIOS RECHAZADOS</h3>
+         </div>
+                     <div id="prueba">
+         <a href="listadoPeticionesEmpresa.php"><img src='http://localhost/gestorB4P/imagenes/imagenEmpresa.png' width='100px' heigth='100px'></a>
+         <h3>PETICIONES EMPRESAS</h3>
+         </div>
+                        <div id="prueba">
+         <a href="listadoPeticionesAceptadasEmpresa.php"><img src='http://localhost/gestorB4P/imagenes/imagenEmpresaAceptada.png' width='100px' heigth='100px'></a>
+         <h3>EMPRESAS ACEPTADAS</h3>
+         </div>
+                                <div id="prueba">
+         <a href="listadoPeticionesRechazadasEmpresa.php"><img src='http://localhost/gestorB4P/imagenes/imagenEmpresaRechazada.png' width='100px' heigth='100px'></a>
+         <h3>EMPRESAS RECHAZADAS</h3>
+         </div>
+                                       <div id="prueba">
+         <a href="listadoMediosADM.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedioGestion.png' width='100px' heigth='100px'></a>
+         <h3>GESTIÓN MEDIOS</h3>
+         </div>
+                                            <div id="prueba">
+         <a href="anadirADM.php" target="_blank"><img src='http://localhost/gestorB4P/imagenes/imagenADM.png' width='100px' heigth='100px'></a>
+         <h3>AÑADIR ADM</h3>
+         </div>
+
+        </div><br>
     </body>
 </html>

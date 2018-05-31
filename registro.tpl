@@ -106,12 +106,7 @@ input {
 }
 
 #ini fieldset input#pass,
-#ini fieldset input#usuario,
-#ini fieldset input#seguidores,
-#ini fieldset input#visitas,
-#ini fieldset input#url,
-#ini fieldset input#direccion,
-#ini fieldset input#correo{
+#ini fieldset input#usuario{
 	background-color: #eee;
 	color: #777;
 	padding: 4px 10px;
@@ -124,7 +119,7 @@ input {
 	display: block;
 	margin: 0 auto;
 	padding: 4px 0;
-	width: 100px;
+	width: 190px;
 }
 
 #ini fieldset input[type="submit"]:hover {
@@ -134,6 +129,8 @@ input {
 width:30px;
 height: 30px;
 }
+#cambiaTam{
+width:150px;}
 
         </style>
     </head>
@@ -143,20 +140,14 @@ height: 30px;
        
             <div id="ini">
                
-                <h2><img id="candado" src="./imagenes/usuario.png">Registro de ADM</h2>
-                  <form method="POST" action="anadirADM.php">
+                <h2><img id="candado" src="./imagenes/usuario.png"> Registro de...</h2>
+
             <fieldset>
-            {$frase}
-                  {literal} 
-            <input type="text" id="usuario" name="user" pattern="[A-Z]*[a-z]+[0-9]{0,9}"   placeholder="Usuario" required><br><br>
-                 {/literal} 
-                 {literal} 
-            <input type="email" id="correo"  pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" name="correo"  placeholder="Correo" required="required"><br><br>
-             {/literal} 
-            <input type="password" id="pass" name="pass" placeholder="Contraseña" required><br><br>
-            <input type="submit" name="enviar" value="Añadir ADM">         
+                <form method="POST" action="registroEmpresa.php">
+                    <input type="submit" name="enviar2" value="Empresas"></form> <br>
+             <form method="POST" action="registroMedio.php">
+                 <input type="submit" name="enviar2" value="Medios de comunicación" id="cambiaTam"></form><br> 
             </fieldset>
-           
-        </form> </div>
+      </div>
     </body>
 </html>

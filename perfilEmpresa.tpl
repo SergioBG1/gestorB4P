@@ -26,12 +26,36 @@ background-image: url("imagenes/fondoWeb.jpg");
 display:inline-block;
 margin-right:20px;
 margin-top:10px;}
-    </style>
-    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  color: white;
 
-        <form method="POST" action="login.php">
+}
+    </style>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header" style="color:white";>
+      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+                            <li>  <div style="margin-top:10px;margin-right:5px;"> <form method="POST" action="login.php">
+             <input type="hidden" name="usuario" value="{$usuario}">
+    <input type="submit" class="btn btn-danger" name="bajar" value="Dar de baja"> 
+        </form></div></li>
+      <li>   <div style="margin-top:10px;margin-right:5px;">  <form method="POST" action="avisarProblemaEmpresa.php" target="_blank">
+             <input type="hidden" name="usuario" value="{$usuario}">
+    <input type="submit" class="btn btn-danger" name="problema" value="Avisar de problema"> 
+              </form></div></li>
+      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form>
+              </form></div></li>
+    </ul>
+  </div>
+</nav>
+    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>
  <div id="medio">
          <div id="prueba">
          <a href="registroProducto.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
@@ -47,17 +71,34 @@ margin-top:10px;}
          </div>
  </div><br>
         <div id="medio">
-            <a href="listadoPeticiones.php">Listado de Peticiones de medios pendientes</a><br>
-            <a href="listadoPeticionesAceptadas.php">Listado de Peticiones de medios aceptadas</a><br>
-            <a href="listadoPeticionesRechazadas.php">Listado de Peticiones de medios rechazadas</a><br>
-            <a href="listadoPeticionesProductos.php">Listado de Peticiones de Productos</a><br>
-            <a href="listadoPeticionesProductos2.php">Listado de Peticiones de Productos Aceptadas</a><br>
-             <a href="listadoPeticionesEventos.php">Listado de Peticiones de Eventos</a><br>
-               <a href="listadoPeticionesEventos2.php">Listado de Peticiones de Eventos Aceptadas</a><br>
-         <form method="POST" action="login.php">
-             <input type="hidden" name="usuario" value="{$usuario}">
-    <input type="submit" class="btn btn-danger" name="bajar" value="Dar de baja"> 
-        </form>
-        </div>
+            <div id="prueba">
+         <a href="listadoPeticionesEventos.php"><img src='http://localhost/gestorB4P/imagenes/imagenEvento.png' width='100px' heigth='100px'></a>
+         <h3>PETICIONES EVENTOS</h3>
+         </div>
+             <div id="prueba">
+         <a href="listadoPeticionesEventos2.php"><img src='http://localhost/gestorB4P/imagenes/imagenEventoOK.png' width='100px' heigth='100px'></a>
+         <h3>EVENTOS ACEPTADOS</h3>
+         </div>
+              <div id="prueba">
+         <a href="listadoPeticionesProductos.php"><img src='http://localhost/gestorB4P/imagenes/iconoProducto.png' width='100px' heigth='100px'></a>
+         <h3>PETICIONES PRODUCTOS</h3>
+         </div>
+                <div id="prueba">
+         <a href="listadoPeticionesProductos2.php"><img src='http://localhost/gestorB4P/imagenes/iconoProductoOK.png' width='100px' heigth='100px'></a>
+         <h3>PRODUCTOS ACEPTADOS</h3>
+         </div>
+               <div id="prueba">
+         <a href="listadoPeticiones.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedio.png' width='100px' heigth='100px'></a>
+         <h3>PETICIONES MEDIOS</h3>
+         </div>
+                  <div id="prueba">
+         <a href="listadoPeticionesAceptadas.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedioOK.png' width='100px' heigth='100px'></a>
+         <h3>MEDIOS ACEPTADOS</h3>
+         </div>
+                  <div id="prueba">
+         <a href="listadoPeticionesRechazadas.php"><img src='http://localhost/gestorB4P/imagenes/imagenMedioNo.png' width='100px' heigth='100px'></a>
+         <h3>MEDIOS RECHAZADOS</h3>
+                  </div>
+        </div><br>
     </body>
 </html>

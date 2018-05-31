@@ -60,9 +60,13 @@ background-image: url("imagenes/fondoWeb.jpg");
      <td>{$medioU[0]["seguidores"]}</td>
       <td>{$productos[{$numero}][0]["nombre"]}</td>
       <td>{$productos[{$numero}][0]["cantidad"]}</td>
-       <td><form method="POST" action="listadoPeticionesProductosRespuesta.php">
+       <td><form method="POST" action="listadoPeticionesProductosRespuesta.php" target="_blank">
                           <input type="hidden" name="peticion" value={$array[{$numero}]['id_peticion']}>
-            <input type="submit" name="aceptar" value="Aceptar">
+                          <input type="hidden" name="correo" value="{$medioU[0]["correo"]}">
+                            <input type="hidden" name="nombre" value="{$medioU[0]["nombre"]}">
+                            <input type="hidden" name="producto" value="{$productos[{$numero}][0]["nombre"]}">
+                             <input type="hidden" name="cantidad" value="{$productos[{$numero}][0]["cantidad"]}">
+            <input type="submit" name="aceptar" value="Aceptar" {if $productos[{$numero}][0]["cantidad"]<0}disabled{/if}>
         </form></td>
           <td><form method="POST" action="listadoPeticionesProductos.php">       
                   <input type="hidden" name="peticion" value={$array[{$numero++}]['id_peticion']}>

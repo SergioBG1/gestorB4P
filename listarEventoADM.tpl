@@ -67,8 +67,8 @@ background-image: url("imagenes/fondoWeb.jpg");
 			
 		</tbody>
 	</table>
-                 <form method="POST" action="registroEvento.php">
-            <input type="submit"  class="btn btn-success" name="volver" value="Volver a Registro">         
+                 <form method="POST" action="perfilADM.php">
+            <input type="submit"  class="btn btn-success" name="volver" value="Volver a Perfil ADM">         
                  </form></div>
         <script language="javascript">
         //Usamos DataTable y lo traducimos a nuestro idioma

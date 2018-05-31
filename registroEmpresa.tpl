@@ -143,18 +143,23 @@ height: 30px;
        
             <div id="ini">
                
-                <h2><img id="candado" src="./imagenes/usuario.png">Registro de ADM</h2>
-                  <form method="POST" action="anadirADM.php">
+                <h2><img id="candado" src="./imagenes/usuario.png">Registro de Empresa</h2>
+                  <form method="POST" action="registroEmpresa.php">
             <fieldset>
             {$frase}
-                  {literal} 
+                          {literal} 
             <input type="text" id="usuario" name="user" pattern="[A-Z]*[a-z]+[0-9]{0,9}"   placeholder="Usuario" required><br><br>
                  {/literal} 
-                 {literal} 
+           {literal} 
             <input type="email" id="correo"  pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" name="correo"  placeholder="Correo" required="required"><br><br>
              {/literal} 
-            <input type="password" id="pass" name="pass" placeholder="Contraseña" required><br><br>
-            <input type="submit" name="enviar" value="Añadir ADM">         
+            <input type="password" id="pass" name="pass" placeholder="Contraseña" required ><br><br>
+            <input type="text" id="direccion" name="direccion" placeholder="Dirección" required><br><br>
+            Empresa de Videojuegos:  <select name="videojuegos">    
+       <option value="si" selected="selected">SI</option>
+       <option value="no">NO</option>
+   </select><br><br>
+            <input type="submit" name="enviar" value="Pedir registro">         
             </fieldset>
            
         </form> </div>

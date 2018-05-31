@@ -42,7 +42,6 @@ input[type="submit"]:disabled {
 		<thead>
 			<tr style="height: 18px; border: 2px solid #000000; background-color: #e3e3e3; ">
 				<th style="text-align: left;">Nombre del Medio</th>
-				<th style="text-align: left;">Dirección</th>
 				<th style="text-align: left;">Visitas</th>
 				<th style="text-align: left;">URL</th>
                                 <th style="text-align: left;">Seguidores</th>
@@ -55,7 +54,6 @@ input[type="submit"]:disabled {
 			 {foreach $array as $item}
 <tr>
     <td>{$item["nombre"]}</td>
-    <td>{$item["direccion"]}</td>
     <td>{$item["visitas"]}</td>
     <td>{$item["url"]}</td>
      <td>{$item["seguidores"]}</td>

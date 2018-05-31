@@ -59,8 +59,12 @@ background-image: url("imagenes/fondoWeb.jpg");
      <td>{$medioU[0]["seguidores"]}</td>
       <td>{$eventos[{$numero}][0]["nombre"]}</td>
       <td>{$eventos[{$numero}][0]["plazas"]}</td>
-       <td><form method="POST" action="listadoPeticionesEventosRespuesta.php">
+       <td><form method="POST" action="listadoPeticionesEventosRespuesta.php" target="_blank">
                           <input type="hidden" name="peticion" value={$array[{$numero}]['id_peticion']}>
+                             <input type="hidden" name="correo" value="{$medioU[0]["correo"]}">
+                            <input type="hidden" name="nombre" value="{$medioU[0]["nombre"]}">
+                            <input type="hidden" name="evento" value="{$eventos[{$numero}][0]["nombre"]}">
+                             <input type="hidden" name="plazas" value="{$eventos[{$numero}][0]["plazas"]}">
             <input type="submit" name="aceptar" value="Aceptar">
         </form></td>
           <td><form method="POST" action="listadoPeticionesEventos.php">

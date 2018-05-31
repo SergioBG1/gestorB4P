@@ -148,7 +148,7 @@ width:150px;}
                     <input type="submit" name="enviar2" value="Empresas"></form> <br>
              <form method="POST" action="login3.php">
                  <input type="submit" name="enviar2" value="Medios de comunicación" id="cambiaTam"></form><br>
-          <a href="registroMedio.php">¿No estás registrado?, pide acceso.</a>   
+          <a href="registro.php">¿No estás registrado?, pide acceso.</a>   
             </fieldset>
       </div>
     </body>

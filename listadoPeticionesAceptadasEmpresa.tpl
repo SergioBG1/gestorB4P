@@ -22,50 +22,42 @@ body{
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
-                background-image: url("imagenes/readyplayer.jpg");
-                 background-size: 100% 100%;
+        background-image: url("imagenes/fondoWeb.jpg");
+        background-size: 50% 50%;
 }
+body.videojuegos{
+background-image: url("imagenes/fondoWeb.jpg");
+}
+
     </style>
-    <body>        <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header" style="color:white";>
-      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
+    <body>     <form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-              </form></div></li>
-    </ul>
-  </div>
-</nav>><div id="contenedor">
+        </form><div id="contenedor">
         <h1>Listado de Peticiones Aceptadas en la plataforma</h1><br>
         <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
 		<thead>
 			<tr style="height: 18px; border: 2px solid #000000; background-color: #e3e3e3; ">
-				<th style="text-align: left;">Nombre Producto</th>
-				<th style="text-align: left;">Plataforma</th>
-				<th style="text-align: left;">Comentario</th>
-                                <th style="text-align: left;"></th>
+				<th style="text-align: left;">Nombre de Empresa</th>
+				<th style="text-align: left;">Dirección</th>
+				<th style="text-align: left;">Videojuegos</th>
+                                <th style="text-align: left;">Correo</th>
                                 
 			</tr>
 		</thead>
 		<tbody>
 			 {foreach $array as $item}
 <tr>
-    <td>{$productos[{$numero}][0]["nombre"]}</td>
-    <td>{$productos[{$numero}][0]["ciudad"]}</td>
-      <td>{$item["seguimiento"]}</td>
-      <td><form method="POST" action="listadoPeticionesEventosCobertura.php" target="_blank">
-              <input type="hidden" name="peticion" value={$array[{$numero++}]['id_peticion']}>
-            <input type="submit" name="cobertura" value="Proporcionar artículo de cobertura">
-        </form></td>
+    <td>{$item["usuario"]}</td>
+    <td>{$item["direccion"]}</td>
+    <td>{$item["rolVideojuegos"]}</td>
+      <td>{$item["correo"]}</td>
 </tr>
 {/foreach}
 			
 		</tbody>
 	</table>
-                 <form method="POST" action="perfilMedio.php">
-            <input type="submit"  class="btn btn-success" name="volver" value="Volver a Registro">         
+                 <form method="POST" action="perfilADM.php">
+            <input type="submit"  class="btn btn-success" name="volver" value="Volver a Inicio">         
                  </form></div>
         <script language="javascript">
         //Usamos DataTable y lo traducimos a nuestro idioma

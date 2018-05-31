@@ -35,6 +35,7 @@ background-image: url("imagenes/fondoWeb.jpg");
         <h1>Listado de Peticiones Rechazadas en la plataforma</h1><br>
         <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">
 		<thead>
+                    {{$texto}}
 			<tr style="height: 18px; border: 2px solid #000000; background-color: #e3e3e3; ">
 				<th style="text-align: left;">Nombre del Medio</th>
 				<th style="text-align: left;">Dirección</th>
