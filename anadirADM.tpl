@@ -138,9 +138,6 @@ height: 30px;
         </style>
     </head>
     <body>
-        
-       
-       
             <div id="ini">
                
                 <h2><img id="candado" src="./imagenes/usuario.png">Registro de ADM</h2>

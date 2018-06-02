@@ -22,7 +22,7 @@ body{
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
-        background-image: url("imagenes/5153.jpg");
+        background-image: url("imagenes/fondoWeb.jpg");
         background-size: 50% 50%;
 }
 body.videojuegos{
@@ -33,9 +33,18 @@ input[type="submit"]:disabled {
 }
 
     </style>
-    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>    <form method="POST" action="login.php">
+    <body {if {$rol[0]['rolVideojuegos']}=='si'}class="videojuegos"{/if}>     <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header" style="color:white";>
+      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form><div id="contenedor">
+              </form></div></li>
+    </ul>
+  </div>
+</nav><div id="contenedor">
         <h1>Listado de Medios de comunicación</h1><br>
         {$texto}
         <table id="tabla_de_miembros" class="dataTables_wrapper no-footer">

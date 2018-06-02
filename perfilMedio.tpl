@@ -8,7 +8,7 @@ border:2px solid;
 border-radius:20px;
 width:70%;
 text-align:center;
-margin-left:10%;
+margin-left:11%;
 background-color:white;
 }
 #medio2{
@@ -19,6 +19,15 @@ width:70%;
 background-color:white;
 margin-top:20px;
 margin-bottom:5px;
+}
+#medio3 {
+    border: 2px solid;
+    padding: 17px;
+    /* border-radius: 20px; */
+    width: 90%;
+    background-color: #FFB400;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 body{
 	color: #000;
@@ -36,6 +45,7 @@ div#myCarousel {
 display:inline-block;
 margin-right:20px;
 margin-top:10px;}
+@font-face { font-family: Delicious; src: url('font/ZingRustD2Demo-Base.otf'); 
     </style>
     
     <body>
@@ -84,8 +94,8 @@ margin-top:10px;}
          </div>
      </div>
 <div class="container">
-    <div id="medio2">
-        <h2>ÚLTIMOS PRODUCTOS AÑADIDOS</h2>  </div>
+    <div id="medio3">
+        <h2 style="font-family: Delicious, sans-serif; font-size:50px;">ÚLTIMOS PRODUCTOS AÑADIDOS</h2>  </div>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -99,23 +109,41 @@ margin-top:10px;}
       <div class="item active">
         <img src="{$imagenFinales[0]}" alt="Los Angeles" style="width:100%;">
         <div class="carousel-caption">
-          <h3>{$datos[0]['nombre']}</h3>
-          <p>{$datos[0]['plataforma']}</p>
+          <h3 style=" background-color: #FFB400;
+    display: block;
+    padding: .15em .2em;
+    line-height: 1em;">{$datos[0]['nombre']}</h3>
+          <p style=" background-color: #FFB400;
+    display: block;
+    padding: .15em .2em;
+    line-height: 1em;"> {$datos[0]['plataforma']}</p>
         </div>
       </div>
 
       <div class="item">
         <img src="{$imagenFinales[1]}" alt="Chicago" style="width:100%;">
         <div class="carousel-caption">
-        <h3>{$datos[1]['nombre']}</h3>
-        <p>{$datos[1]['plataforma']}</p></div>
+        <h3 style=" background-color: #FFB400;
+    display: block;
+    padding: .15em .2em;
+    line-height: 1em;">{$datos[1]['nombre']}</h3>
+        <p style=" background-color: #FFB400;
+    display: block;
+    padding: .15em .2em;
+    line-height: 1em;">{$datos[1]['plataforma']}</p></div>
       </div>
     
       <div class="item">
         <img src="{$imagenFinales[2]}" alt="New york" style="width:100%;">
         <div class="carousel-caption">
-        <h3>{$datos[2]['nombre']}a</h3>
-          <p>{$datos[2]['plataforma']}</p></div>
+        <h3 style=" background-color: #FFB400;
+    display: block;
+    padding: .15em .2em;
+    line-height: 1em;">{$datos[2]['nombre']}a</h3>
+          <p style=" background-color: #FFB400;
+    display: block;
+    padding: .15em .2em;
+    line-height: 1em;">{$datos[2]['plataforma']}</p></div>
       </div>
     </div>
 

@@ -30,14 +30,6 @@ display:inline-block;}
       <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
     </div>
     <ul class="nav navbar-nav navbar-right">
-                            <li>  <div style="margin-top:10px;margin-right:5px;"> <form method="POST" action="login.php">
-             <input type="hidden" name="usuario" value="{$usuario}">
-    <input type="submit" class="btn btn-danger" name="bajar2" value="Dar de baja"> 
-        </form></div></li>
-      <li>   <div style="margin-top:10px;margin-right:5px;">  <form method="POST" action="avisarProblema.php" target="_blank">
-             <input type="hidden" name="usuario" value="{$usuario}">
-    <input type="submit" class="btn btn-danger" name="problema" value="Avisar de problema"> 
-              </form></div></li>
       <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
               </form></div></li>

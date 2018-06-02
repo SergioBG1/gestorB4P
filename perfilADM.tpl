@@ -26,9 +26,18 @@ margin-top:10px;}
     </style>
     <body>
 
-        <form method="POST" action="login.php">
+        <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header" style="color:white";>
+      <img src="http://localhost/gestorB4P/imagenes/logo.png" style="width:20%;"/>GESTOR B4P
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>  <div style="margin-top:10px;margin-right:5px;"><form method="POST" action="login.php">
     <input type="submit" class="btn btn-danger" name="vuelve" value="Salir"> 
-        </form>
+              </form></div></li>
+    </ul>
+  </div>
+</nav>
  <div id="medio">
          <div id="prueba">
          <a href="listarProductoADM.php"><img src='imagenes/imagen1.png' width='150px' heigth='150px'></a>
